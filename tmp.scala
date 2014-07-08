@@ -5,8 +5,128 @@
 
 
 
+
+
+
 /*
+// 偶数ならば処理する
+def isEven(i: Int) = i % 2 == 0
+
+for {i <- 1 to 100 if isEven(i)}
+  println(i)
 */
+
+
+
+/*
+// xmlリテラル
+val name = "anokutara"
+println(<author>{name}</author>)
+*/
+
+
+
+/*
+val u = ()
+*/
+
+
+
+/*
+// forのネスト
+for { i <- 1 to 10
+  j <- 1 to 10 }
+{
+  println(i.toString + " " + j.toString)
+}
+*/
+
+
+
+
+/*
+class  MyTest { val inClass  = 1 }
+object MyTest { val inObject = 2 }
+*/
+
+
+
+/*
+class MyTest {
+  def hoge1(x: Int) = x + 1
+  def hoge2(x: => Int) = x + 1
+  def hoge3(x: () => Int) = x() + 1
+}
+*/
+
+
+/*
+// defの定義で、引数なしと空括弧は微妙に違う
+def a = 1
+def b() = 1
+println(a)
+println(b())
+
+// 引数無しで定義すると"func1()"では呼び出せない
+//println(a())
+// 空括弧で定義すると"func2()"でも"func2"でも呼び出せる
+println(b)
+
+
+def func1 = (_: Int) + 1
+def func2() = (_: Int) + 1
+
+println(func1)
+//println(func1())
+
+println( func2 )
+println( func2() )
+
+println( func1(5) )
+//println( func2(5) )
+println( func2()(5) )
+*/
+
+
+/*
+class MyTest {
+  def hoge1(x: String): Int = x.length
+  def hoge2: String => Int = x => x.length
+}
+*/
+
+/*
+// メソッドと関数型のフィールドは違う
+//def hoge(x: String): Int = x.length
+def hoge(x: String): Int = {
+  x.length
+}
+println(hoge("abcde"))
+println(hoge(x = "abcde"))
+
+//def fuga: String => Int = x => x.length
+def fuga: String => Int = {
+  x => x.length
+}
+println(fuga("abcde"))
+//println(fuga(x = "abcde"))
+println(fuga(v1 = "abcde"))
+*/
+
+
+
+/*
+// クラス定義のvar、def、val はメソッド
+class ValVarDef {
+  val x = 1
+  var y = 2
+  def z = 3
+}
+*/
+
+
+
+/*
 // Actorの利用
 import akka.actor
 import akka.actor._
@@ -53,6 +173,7 @@ sys2.shutdown()
 
 println(variable)
 println("Finished")
+*/
 
 
 /*
