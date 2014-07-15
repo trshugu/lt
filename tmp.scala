@@ -5,6 +5,26 @@
 
 
 
+/*
+// リクエスト
+import dispatch._
+import Defaults._
+
+println("asdf")
+
+val svc = url("http://yahoo.co.jp")
+val country = Http(svc OK as.String)
+
+println("end")
+*/
+
+/*
+*/
+import dispatch._
+
+object Hell {
+  def main(args: Array[String]) = println("Hell...")
+}
 
 
 
