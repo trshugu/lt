@@ -20,10 +20,10 @@ println("end")
 
 /*
 */
-import dispatch._
-
+// sbt練習
 object Hell {
-  def main(args: Array[String]) = println("Hell...")
+  def main(args: Array[String]) = println("Hells...")
+  println("mi-acat")
 }
 
 
