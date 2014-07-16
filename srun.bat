@@ -1,3 +1,3 @@
 @echo off
-rem scala -classpath ./*.jar tmp.scala
-sbt run
+scala -classpath ./*.jar tmp.scala
+rem sbt run

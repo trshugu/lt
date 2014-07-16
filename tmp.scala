@@ -5,6 +5,87 @@
 
 
 
+
+
+
+/*
+// enum
+object Enuenu extends Enumeration {
+  type Enuenu = Value
+  val Ichi = Value("one")
+  val Ni = Value("two")
+  val San = Value("three")
+}
+println(Enuenu.values)
+
+val moji = Enuenu.Ni.toString()
+
+val enu = Enuenu.Ni
+println(enu match {
+  case Enuenu.Ni => enu
+  case _ => "mu"
+})
+
+// 正規表現リテラル
+val strin = "abcde"
+var qwert = "qwert"
+
+val we = "we".r
+val lr = List("we".r)
+
+if (strin.contains("bcd")) {
+  println("in")
+}
+
+
+val mamama = "abdao3"
+val r = "(abc)(123)".r;
+println( mamama match {
+  case "dao" | "o3" | "abdao3" => "ari"
+  case "abo3" => "ari2"
+  case _         => "nothing"
+});
+*/
+
+
+
+/*
+// 正規表現
+println("testesers")
+val s = "abcde"
+val r = "bcd".r
+val z = "zzza".r
+
+for(m <-  r.findAllIn(s).matchData)
+{
+  println("r match")
+  println(m)
+}
+
+for(m <-  z.findAllIn(s).matchData)
+{
+  println("z match")
+  println(m)
+}
+
+val t = "qqqzzzeee"
+t match {
+  case z => {
+    println("zzz match")
+  }
+}
+
+
+//val g = new scala.util.matching.Regex("rrr", "ggg", "ppp")
+val v = "vvv".r
+
+t match {
+  case v => println("list match");
+  case _ => println("un match")
+}
+*/
+
+
 /*
 // リクエスト
 import dispatch._
@@ -19,12 +100,12 @@ println("end")
 */
 
 /*
-*/
 // sbt練習
 object Hell {
   def main(args: Array[String]) = println("Hells...")
   println("mi-acat")
 }
+*/
 
 
 
