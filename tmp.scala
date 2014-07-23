@@ -1,11 +1,108 @@
 /*
 */
+/*
+object tmp {
+}
+*/
 
 
 
 
 
 
+/*
+// ビットシフト
+var n = 4
+var r = 8
+println( -8 << 1 )
+println( -8 >> 1 )
+println( -8 >>> 1 )
+println( 6 & 4 )
+println( 16 ^ 15 )
+*/
+
+/*
+// インクリメント件
+var a = 0
+val b = a += 1
+println(a)
+println(b)
+println(1.+(2))
+println(1+2)
+println(1 + 2)
+println(("aa,dd" split ",")(1))
+println(("aa,dd".split(","))(1))
+
+var y = 3
+y += 2
+println(y)
+
+var z = 3
+z =z.+(2)
+println(z)
+*/
+
+/*
+// 三項演算子の代用
+val sanko = if(true) "ttt" else "fff"
+println(sanko)
+*/
+
+
+
+/*
+// tuple
+val tu = ("tt","uup","lll","eee")
+println(tu)
+println(tu._1)
+println(tu._3)
+*/
+
+
+
+/*
+// map
+val m = Map[String,String]("ai"->"ao", "syu"->"aka", "sou"->"midori")
+println(m)
+println(m.head)
+println(m("syu"))
+println(m.empty)
+println(m + ("enji"->"hi"))
+println(m - "sou")
+println(m.keySet)
+println(m.values)
+*/
+
+
+
+/*
+// List
+val liste=List("sdf")
+println(liste(0))
+val lislis = "luck" :: liste
+println(lislis.head)
+val liskis = lislis.::("cruel")
+println(liskis.head)
+*/
+
+
+/*
+// splitと配列
+val stt = "sadf,eref,asdf"
+val arst = stt.split(",")
+println(arst(0))
+println(arst{1})
+
+println(arst.size)
+println(arst.length)
+println(arst.head)
+println(arst.tail.head)
+println(arst.isEmpty)
+
+val hoge = Array(10,20,30,40)
+hoge(0) = 100
+print(hoge(0)) // 100って表示される
+*/
 
 
 /*
