@@ -101,7 +101,10 @@ println(arst.isEmpty)
 
 val hoge = Array(10,20,30,40)
 hoge(0) = 100
-print(hoge(0)) // 100って表示される
+println(hoge(0)) // 100って表示される
+
+val arr =Array(5,2,3,4)
+println( arr.find(n=>n==6) )
 */
 
 
