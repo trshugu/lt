@@ -10,6 +10,8 @@ object tmp {
 
 
 
+
+
 /*
 // ビットシフト
 var n = 4
@@ -77,13 +79,16 @@ println(m.values)
 
 /*
 // List
+*/
 val liste=List("sdf")
 println(liste(0))
 val lislis = "luck" :: liste
 println(lislis.head)
 val liskis = lislis.::("cruel")
 println(liskis.head)
-*/
+
+liskis.find(n=>n=="sdf")
+println(List("sdfsdfs").getClass)
 
 
 /*
@@ -98,6 +103,8 @@ println(arst.length)
 println(arst.head)
 println(arst.tail.head)
 println(arst.isEmpty)
+
+println( (arst.find( n => n == "eref" )) )
 
 val hoge = Array(10,20,30,40)
 hoge(0) = 100
