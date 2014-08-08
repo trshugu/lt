@@ -1,8 +1,7 @@
-package com.example.app
 import org.scalatra._
 
-class HelloWorldApp extends ScalatraFilter {
+object tra extends ScalatraServlet {
   get("/") {
-    <h1>Hello, {params("name")}</h1>
+    <h1>Hello, world!</h1>
   }
 }
