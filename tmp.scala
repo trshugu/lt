@@ -8,7 +8,45 @@ object tmp {
 
 
 
+/*
+// scalaストップウォッチ
+import java.util.concurrent.TimeUnit;
 
+val starttime = System.currentTimeMillis();
+
+TimeUnit.MILLISECONDS.sleep(1);
+
+val endtime = System.currentTimeMillis();
+
+println(endtime - starttime)
+*/
+
+
+/*
+// sleep
+import java.util.concurrent.TimeUnit;
+println("test")
+TimeUnit.SECONDS.sleep(1);
+println("test")
+*/
+
+
+/*
+import org.scalatra._
+
+object tmp {
+def main(args: Array[String]) = println("")
+  println("mi-acat")
+  println("asdf")
+
+}
+
+class HelloWorldApp extends ScalatraServlet {
+  get("/") {
+    <h1>Hell</h1>
+  }
+}
+*/
 
 
 
@@ -79,7 +117,6 @@ println(m.values)
 
 /*
 // List
-*/
 val liste=List("sdf")
 println(liste(0))
 val lislis = "luck" :: liste
@@ -89,6 +126,7 @@ println(liskis.head)
 
 liskis.find(n=>n=="sdf")
 println(List("sdfsdfs").getClass)
+*/
 
 
 /*
