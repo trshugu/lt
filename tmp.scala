@@ -8,6 +8,31 @@ object tmp {
 
 
 
+
+
+/*
+// ランダムな文字列の生成
+import scala.util.Random
+
+def getRandomStr(n: Int):String = {
+  val s =
+    ('a' until 'z').toList :::
+    ('A' until 'Z').toList :::
+    (0 until 9).toList :::
+    List("+", "$", "%")
+
+  if (n <= 0 || n > s.length) return ""
+  
+  Random.shuffle(s).mkString("").slice(0, n)
+}
+
+//if (args.length != 1) sys.exit()
+//println(getRandomStr(args(0).toInt))
+println( getRandomStr(8) )
+*/
+
+
+
 /*
 // scalaストップウォッチ
 import java.util.concurrent.TimeUnit;
