@@ -7,6 +7,31 @@ object tmp {
 
 
 
+
+
+
+
+
+/*
+// ダイジェスト
+import java.security.MessageDigest
+
+class Sha1Digest(str: String) {
+  val digestString: String = {
+    val md = MessageDigest.getInstance("SHA-1")
+    md.update(str.getBytes)
+    md.digest.foldLeft("") { (s, b) => s + "%02x".format(if(b < 0) b + 256 else b) }
+  }
+}
+
+object App {
+  def main(args: Array[String]) =
+    List("全部", "違う", "値になります").foreach { str => println(str.digestString) }
+
+  implicit def String2Sha1Digest(s: String): Sha1Digest = new Sha1Digest(s)
+}
+*/
+
 /*
 // ランダムな文字列の生成(英数字)
 println(scala.util.Random.alphanumeric.take(8).mkString)
