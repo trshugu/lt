@@ -7,11 +7,13 @@ object tmp {
 
 
 
-
-
+/*
+// ランダムな文字列の生成(英数字)
+println(scala.util.Random.alphanumeric.take(8).mkString)
+*/
 
 /*
-// ランダムな文字列の生成
+// ランダムな文字列の生成(記号付き)
 import scala.util.Random
 
 def getRandomStr(n: Int):String = {
