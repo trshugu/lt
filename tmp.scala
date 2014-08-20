@@ -8,8 +8,61 @@ object tmp {
 
 
 
+/*
+*/
+// 総件数カウント
+
+/*
+*/
+// 無視リスト
+
+/*
+*/
+// uriを抽出しリストに格納
+
+/*
+*/
+// ファイル書き出し
+// ファイル読み込み
+// 同じファイルが存在していたら削除
+// ファイル存在確認
 
 
+
+/*
+*/
+// 引数取得
+//if (args.length != 1) sys.exit()
+//println(getRandomStr(args(0).toInt))
+
+
+/*
+*/
+// logger
+
+
+/*
+*/
+// 並行処理
+
+
+/*
+*/
+// https通信 レスポンス取得
+
+
+
+/*
+// http通信 レスポンス取得
+*/
+import scala.io.Source
+object tmp { def main(args: Array[String]): Unit = {
+
+val source = Source.fromURL( "http://yahoo.co.jp", "utf8" )
+//println( source )
+println( source.getLines.mkString )
+
+}}
 
 
 /*
