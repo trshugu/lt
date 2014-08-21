@@ -42,53 +42,62 @@ object tmp {
 
 
 /*
+// 並行処理2
 */
+import akka.actor
+import akka.actor._
+import akka.routing.RoundRobinRouter
+
+class PrintActor extends Actor {
+  def receive = {
+    case x => println(x)
+    //case x => x == x
+  }
+}
+
+val sys = ActorSystem("as")
+//val act = sys.actorOf(Props(new PrintActor), "nanamee")
+
+//(0 to 1000).foreach(act ! _) 
+  //act ! scala.util.Random.alphanumeric.take(8).mkString
+//  act ! i
+//}
+
+val router = sys.actorOf(Props(new PrintActor).withRouter(RoundRobinRouter(2)))
+(0 to 1000*1000).foreach(router ! _) 
+
+Thread.sleep(1000)
+//sys.shutdown
+
+
+/*
 // 並行処理
 import akka.actor
 import akka.actor._
+import java.util.concurrent.TimeUnit;
 
-var variable = 0
-val LOOP = 1000 * 1000 * 1000
 
-def increment() = {
-  //this.synchronized {
-    variable = variable + 1
-  //}
-}
-
-class da extends Actor {
-  def receive = {case "helll" =>
-    for( i <- 0 until LOOP )
-      increment()
-    println("nanigari")
-    println(variable)
+class act extends Actor {
+  //val nanika = scala.util.Random.alphanumeric.take(8).mkString
+  val nanika = "a:" + System.currentTimeMillis()
+  def receive = {case "rec" =>
+    println("act:" + nanika)
   }
 }
 
 val sys = ActorSystem.create
-val ref = sys.actorOf(Props(new da()))
+val ref = sys.actorOf( Props(new act()) )
+TimeUnit.MILLISECONDS.sleep(1000);
+val ref2 = sys.actorOf( Props(new act()) )
 
-class da2 extends Actor {
-  def receive = {case "helll" =>
-    for( i <- 0 until LOOP )
-      increment()
-    println("nanigari")
-    println(variable)
-  }
-}
-
-val sys2 = ActorSystem.create
-val ref2 = sys2.actorOf(Props(new da2()))
-
-ref ! "helll"
-//ref2 ! "helll"
+ref ! "rec"
+TimeUnit.MILLISECONDS.sleep(1000);
+ref2 ! "rec"
 
 sys.shutdown()
-sys2.shutdown()
 
-
-println(variable)
 println("Finished")
+*/
 
 
 
