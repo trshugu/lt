@@ -46,22 +46,138 @@ object tmp {
 // 並行処理
 
 
+
+
+
 /*
-*/
 // https通信 レスポンス取得
+import java.net.URL
+import java.net.HttpURLConnection
+import sun.net.www.protocol.https.HttpsURLConnectionImpl
+
+//val url = new URL("http://api.hostip.info/country.php")
+//val url = new URL("http://yahoo.co.jp/")
+val url = new URL("http://www.yahoo.co.jp/")
+//val url = new URL("http://yahooo.co.jp/anokutara")
+//val url = new URL("http://yahoo.co.jp/anokutara")
+//val url = new URL("http://nochint.co.no")
+//val url = new URL("https://translate.google.co.jp/")
+//val url = new URL("https://www.java.net/")
+//val url = new URL("http://www.java.net/")
+
+val conn = url.openConnection().asInstanceOf[HttpURLConnection]
+//val conn = url.openConnection()
+println(conn.getClass())
+conn.setInstanceFollowRedirects(false)
+println(conn.getResponseCode())
+
+println(conn.getHeaderFields())
+
+// Body取得
+val in = conn.getInputStream()
+val bodyByte = new Array[Byte](1024)
+while(in.read(bodyByte) != -1){
+println(new String(bodyByte, "utf8"))
+}
+//println(ir)
+in.close()
+*/
 
 
+
+
+/*
+// http通信 レスポンス取得4
+import java.net.URL
+import java.net.HttpURLConnection
+
+//val url = new URL("http://api.hostip.info/country.php")
+//val url = new URL("http://yahoo.co.jp/")
+val url = new URL("http://www.yahoo.co.jp/")
+//val url = new URL("http://yahooo.co.jp/anokutara")
+//val url = new URL("http://yahoo.co.jp/anokutara")
+//val url = new URL("http://nochint.co.no")
+
+val conn = url.openConnection().asInstanceOf[HttpURLConnection]
+conn.setInstanceFollowRedirects(false)
+println(conn.getResponseCode())
+*/
+
+
+/*
+// http通信 レスポンス取得3
+import java.net.URL
+import java.net.HttpURLConnection
+
+//val url = new URL("http://api.hostip.info/country.php")
+//val url = new URL("http://yahoo.co.jp")
+//val url = new URL("http://yahooo.co.jp/anokutara")
+val url = new URL("http://yahoo.co.jp/anokutara")
+//val url = new URL("http://nochint.co.no")
+
+val conn = url.openConnection().asInstanceOf[HttpURLConnection]
+conn.setInstanceFollowRedirects(false)
+val map = conn.getHeaderFields()
+println(conn.getResponseCode())
+//println(map.isEmpty)
+println(map)
+//val rc = conn.asInstanceOf[HttpURLConnection].getResponseCode()
+//println(rc)
+*/
+
+
+/*
+// http通信 レスポンス取得2
+import java.net.URL
+import java.net.HttpURLConnection
+import scala.collection.JavaConversions._
+
+val url = new URL("http://api.hostip.info/country.php")
+//val url = new URL("http://yahoo.co.jp")
+//val url = new URL("http://nochint.co.no")
+
+  val conn = url.openConnection()
+println(conn.getClass())
+//val map = conn.getHeaderFields()
+////val header = conn.getHeaderField(null)
+val rc = conn.asInstanceOf[HttpURLConnection].getResponseCode()
+println(rc)
+//println(url)
+//println(conn)
+//println(map)
+
+//for (e <- map)
+//{
+//  println(e(1))
+//}
+
+//map.foreach { case(k,v)=>
+//  println("-----------------")
+//  println(k.getClass())
+//  println(v.getClass())
+//}
+
+//val ural = map(null)
+//println(ural.get(0))
+
+println("death")
+*/
 
 /*
 // http通信 レスポンス取得
 import scala.io.Source
 object tmp { def main(args: Array[String]): Unit = {
 
-val source = Source.fromURL( "http://yahoo.co.jp", "utf8" )
+val source = Source.fromURL( "http://api.hostip.info/country.php", "utf8" )
 //println( source )
 println( source.getLines.mkString )
 
 }}
+
+import scala.io.Source
+val source = Source.fromURL( "http://api.hostip.info/country.php", "utf8" )
+println( source.getLines.toList )
+
 */
 
 
