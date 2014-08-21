@@ -54,7 +54,6 @@ object tmp {
 
 /*
 // http通信 レスポンス取得
-*/
 import scala.io.Source
 object tmp { def main(args: Array[String]): Unit = {
 
@@ -63,6 +62,7 @@ val source = Source.fromURL( "http://yahoo.co.jp", "utf8" )
 println( source.getLines.mkString )
 
 }}
+*/
 
 
 /*
@@ -341,12 +341,15 @@ t match {
 import dispatch._
 import Defaults._
 
+object tmp { def main(args: Array[String]) {
 println("asdf")
 
-val svc = url("http://yahoo.co.jp")
+val svc = url("http://api.hostip.info/country.php")
 val country = Http(svc OK as.String)
+println(country())
 
 println("end")
+}}
 */
 
 /*
