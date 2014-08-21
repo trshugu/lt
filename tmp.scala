@@ -44,6 +44,51 @@ object tmp {
 /*
 */
 // 並行処理
+import akka.actor
+import akka.actor._
+
+var variable = 0
+val LOOP = 1000 * 1000 * 1000
+
+def increment() = {
+  //this.synchronized {
+    variable = variable + 1
+  //}
+}
+
+class da extends Actor {
+  def receive = {case "helll" =>
+    for( i <- 0 until LOOP )
+      increment()
+    println("nanigari")
+    println(variable)
+  }
+}
+
+val sys = ActorSystem.create
+val ref = sys.actorOf(Props(new da()))
+
+class da2 extends Actor {
+  def receive = {case "helll" =>
+    for( i <- 0 until LOOP )
+      increment()
+    println("nanigari")
+    println(variable)
+  }
+}
+
+val sys2 = ActorSystem.create
+val ref2 = sys2.actorOf(Props(new da2()))
+
+ref ! "helll"
+//ref2 ! "helll"
+
+sys.shutdown()
+sys2.shutdown()
+
+
+println(variable)
+println("Finished")
 
 
 
