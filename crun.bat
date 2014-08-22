@@ -9,5 +9,5 @@ scalac -classpath ^
 ./lib/paranamer-2.5.6.jar;^
 :./lib/snakeyaml-1.13.jar;^
 :./lib/yamlbeans-1.0.jar;^
- tmp.scala && scala tmp
+ tmp.scala %1 && scala tmp
 rem sbt run

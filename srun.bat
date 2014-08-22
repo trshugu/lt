@@ -19,7 +19,7 @@ scala -classpath ^
 ./lib/logback-core-1.1.2.jar;^
 ./lib/logback-classic-1.1.2.jar;^
 :./lib/logback-access-1.1.2.jar;^
- tmp.scala
+ tmp.scala %1
 
 rem scala -classpath ./lib/*.jar tmp.scala
 rem sbt run

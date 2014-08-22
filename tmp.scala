@@ -8,36 +8,82 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// uriを抽出
+val url = "http://yahooo"
+val r = "^http".r
+
+if ( r.findFirstIn(url) == Some("http") ) {
+  println("is url")
+} else {
+  println("is not url")
+}
+println("  sadlkfj  ".trim)
+
+*/
+
 
 /*
+// ファイルに追記
+import java.io.FileWriter
+
+val o = new FileWriter("write.txt", true)
+o.write("hell...\n")
+o.close
 */
-// 総件数カウント
+
 
 /*
-*/
-// 無視リスト
-
-/*
-*/
-// uriを抽出しリストに格納
-
-/*
-*/
-// ファイル書き出し
-// ファイル読み込み
 // 同じファイルが存在していたら削除
-// ファイル存在確認
+import java.io.PrintWriter
+import java.io.File
+
+val o = new PrintWriter("write.txt")
+o.println("hell...\n")
+o.close
+
+val f = new File("write.txt")
+
+if(f.exists) {
+  println("ari")
+  f.delete
+}else{
+  println("nasi")
+}
+*/
 
 
 
 /*
+// ファイル読み込み
+import scala.io.Source
+
+val s = Source.fromFile("README.md")
+
+try {
+  for(line <- s.getLines) {
+    println(line)
+  }
+} finally{
+  s.close
+}
 */
+
+/*
+// ファイル存在確認
+import java.io.File
+
+val f = new File("README.md")
+if(f.exists) println("ari")
+*/
+
+
+
+/*
 // 引数取得
-//if (args.length != 1) sys.exit()
-//println(getRandomStr(args(0).toInt))
-
-
-
+if (args.length != 1) sys.exit()
+println( args(0) )
+*/
 
 
 
