@@ -1,8 +1,9 @@
 /*
 */
 /*
-object tmp {
-}
+
+object tmp { def main(args: Array[String]): Unit = {
+}}
 */
 
 
@@ -36,14 +37,138 @@ object tmp {
 //println(getRandomStr(args(0).toInt))
 
 
-/*
-*/
-// logger
+
+
 
 
 /*
-// 並行処理2
+// logger (java)
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+println("sadf")
+
+// logback
+val logtest = LoggerFactory.getLogger("tmpp")
+
+logtest.debug("Hello Logger");
+
+//logtest.fatal("本当にやばいログ　　");
+logtest.error("普通にやばいログ　　");
+logtest.warn( "ちょっとやばいログ　");
+logtest.info( "運用時に必要なログ　");
+logtest.debug("開発時に必要なログ　");
+logtest.trace("デスマ時に必要なログ");
 */
+
+
+
+
+
+/*
+// gson2 Map
+import com.google.gson._
+import scala.collection.JavaConversions._
+
+val g: Gson = new Gson()
+var map = Map("kanoku"->"vanoku", "ktara"->"vtara")
+println(g.toJson(map))  
+
+val jMap: java.util.Map[String, String] = map
+println(g.toJson(jMap))  
+*/
+
+
+/*
+// gson
+import java.io._
+import com.google.gson._
+import com.google.gson.annotations._
+import com.google.gson.stream._
+
+
+class BagOfPrimitives {
+  val value1 = 1
+  val value2 = "abc"
+  val value3 = 3
+}
+
+
+println( "test" )
+
+
+val g: Gson = new Gson()
+//val obj = new BagOfPrimitives
+//val obj: BagOfPrimitives = new BagOfPrimitives
+//println( g )
+//println( obj )
+//println( BagOfPrimitives.value1 )
+//println( BagOfPrimitives.value2 )
+val obj = new Array[String](3)
+obj(0) = "sdf"
+obj(1) = "23r"
+obj(2) = "24twe"
+println( g.toJson( obj ) )
+//println( g.toJson( BagOfPrimitives ) )
+*/
+
+
+
+
+
+/*
+// json2 ぜんぜんダメ
+//import org.json4s._
+//import org.json4s.native.JsonMethods._
+//import org.json4s.jackson.JsonMethods._
+
+object tmp { def main(args: Array[String]): Unit = {
+
+//parse(""" { "numbers" : [1, 2, 3, 4] } """)
+
+//println( parse(""" { "numbers" : [1, 2, 3, 4] } """) )
+//println( parse("""{"name":"Toy","price":35.35}""", useBigDecimalForDouble = true) )
+
+//println( "test" )
+}}
+*/
+
+/*
+// 整理2
+import yaml._
+import redis.clients.jedis._;
+
+println( "test" )
+*/
+
+
+/*
+// 整理
+import yaml._
+import redis.clients.jedis._;
+
+object tmp { def main(args: Array[String]): Unit = {
+  println( "test" )
+}}
+*/
+
+
+/*
+// json
+import org.json4s._
+//import org.json4s.native.JsonMethods._
+import org.json4s.jackson.JsonMethods._
+
+object tmp { def main(args: Array[String]): Unit = {
+  println( parse(""" { "numbers" : [1, 2, 3, 4] } """) )
+  println( parse("""{"name":"Toy","price":35.35}""", useBigDecimalForDouble = true) )
+  println(  )
+}}
+*/
+
+
+/*
+// 並行処理2 ラウンドロビン
 import akka.actor
 import akka.actor._
 import akka.routing.RoundRobinRouter
@@ -68,6 +193,7 @@ val router = sys.actorOf(Props(new PrintActor).withRouter(RoundRobinRouter(2)))
 
 Thread.sleep(1000)
 //sys.shutdown
+*/
 
 
 /*
