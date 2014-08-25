@@ -17,10 +17,11 @@ import com.google.gson._
 import scala.collection.JavaConversions._
 
 val g: Gson = new Gson()
-var map = Map("kanoku"->"vanoku", "ktara"->"vtara")
+var map = Map("kanoku"->"vanoku", "ktara"->null)
 val jMap: java.util.Map[String, String] = map
 
 val gb: Gson = new GsonBuilder().setPrettyPrinting().create()
+//val gb: Gson = new GsonBuilder().serializeNulls().create()
 println(gb.toJson(map))
 println(gb.toJson(jMap))
 */
