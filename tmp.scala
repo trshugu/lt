@@ -10,6 +10,23 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+/*
+// gson3 gsonbuilder
+import com.google.gson._
+import scala.collection.JavaConversions._
+
+val g: Gson = new Gson()
+var map = Map("kanoku"->"vanoku", "ktara"->"vtara")
+val jMap: java.util.Map[String, String] = map
+
+val gb: Gson = new GsonBuilder().setPrettyPrinting().create()
+println(gb.toJson(map))
+println(gb.toJson(jMap))
+*/
+
+
+
 /*
 // uriを抽出
 val url = "http://yahooo"
