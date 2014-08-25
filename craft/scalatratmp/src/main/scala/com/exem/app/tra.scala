@@ -1,3 +1,4 @@
+package com.exem.app
 import org.scalatra._
 
 object tra extends ScalatraServlet {

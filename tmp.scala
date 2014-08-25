@@ -8,6 +8,8 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
 /*
 // uriを抽出
 val url = "http://yahooo"
