@@ -12,6 +12,196 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+import com.google.gson._
+import scala.collection.JavaConversions._
+
+val g: Gson = new Gson
+val json = "[\"ichi\",\"ni\"]"
+println(json)
+val a = g.toJson(json)
+println(a)
+println(g.fromJson(a, classOf[String]))
+
+val jb: java.util.List[String] = List("fe","saf")
+println(jb)
+println(g.toJson(jb))
+*/
+
+
+/*
+// gson4 デシリアライズ(Json -> Javaオブジェクト)
+import com.google.gson._
+import scala.collection.JavaConversions._
+
+class Bydo{
+  var kiga: String = _
+//  var tuku: String = _
+//  var towa : Integer = _
+//  var tashi: Integer = _
+//  var haba: List[String] = _ 
+}
+
+//val map = Map(
+//  "kiga" -> "ido"
+//  "tuku" -> "nina",
+//  "towa" -> 12,
+//  "tashi" -> 2,
+//  "haba" -> List("tute","ita")
+//)
+
+val j: String = "{\"kiga\":\"tuku\"}"
+
+val g: Gson = new Gson
+val b: Bydo = new Bydo
+val t: Bydo = g.fromJson( j, b.getClass )
+println(g.fromJson( j, b.getClass ))
+*/
+
+
+
+
+/*
+// toJson
+import com.google.gson._
+import scala.collection.JavaConversions._
+
+val g: Gson = new Gson
+
+//var map = Map("kanoku"->"vanoku", "ktara"->null)
+//val jMap: java.util.Map[String, String] = map
+
+//val gb: Gson = new GsonBuilder().setPrettyPrinting().create()
+//val gb: Gson = new GsonBuilder().serializeNulls().create()
+//println(gb.toJson(map))
+//println(gb.toJson(jMap))
+
+class Bydo (pa:String,ru:String){
+  var s2: String= pa
+  var s3: String= ru
+  var value1: String = "kiga"
+  var value2: String = "tuku"
+  var value3: String = "42"
+  
+  override def toString = "noinoi"
+}
+
+val b: Bydo =  new Bydo("fefe","asf")
+println( b.value1 )
+println( b.value2 )
+println( b.value3 )
+println( b.s2 )
+println( b.s3 )
+
+println(b)
+
+val jb: String = g.toJson( b, classOf[Bydo] )
+println( jb )
+
+val j = "{pa:\"asf\"}"
+val a: Bydo = g.fromJson(j , classOf[Bydo])
+println(a)
+*/
+
+
+/*
+val arr = new Array[String](3)
+arr(0) = "towa"
+arr(1) = "tashi"
+arr(2) = "haba"
+
+val ja = g.toJson( arr )
+println( ja )
+*/
+
+/*
+// fromJson
+import com.google.gson._
+import scala.collection.JavaConversions._
+
+val g: Gson = new Gson
+val str = g.fromJson("123", classOf[String])
+val num = g.fromJson("123", classOf[Integer])
+println(str + 2)
+println(num + 2)
+*/
+
+/*
+// List
+import java.util._
+
+var l: List[String] = new ArrayList[String]
+l.add("asdf")
+
+println(l)
+*/
+
+
+/*
+class hako {
+  var para:String = _
+  
+  def don = {
+    this.para = "don"
+  }
+  
+  override def toString = this.para
+}
+
+
+val re = new hako
+println(re.para)
+re.para="nanika"
+println(re.para)
+re.don
+println(re.para)
+println(re)
+*/
+
+
+
+
+/*
+// constructor3
+class hako(para: String,meta: Integer) {
+  def this(para: String) = this(para, 99)
+  def this(meta: Integer) = this("nai",meta)
+  
+  override def toString = para + ":" + meta
+}
+
+println(new hako("st", 7))
+println(new hako("st"))
+println(new hako(4))
+*/
+
+
+
+
+
+/*
+// constructor2
+class hako(para: String,meta: String) {
+  override def toString = para + ":" + meta
+}
+
+println(new hako("st", "asf"))
+*/
+
+/*
+// constructor
+class hako(para: String,meta: String) {
+  var param = para
+  var metar = meta
+}
+
+val rect = new hako("papapa", "mmemme")
+
+
+println(rect.param)
+println(rect.metar)
+*/
+
+/*
 // gson3 gsonbuilder
 import com.google.gson._
 import scala.collection.JavaConversions._
