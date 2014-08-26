@@ -9,6 +9,28 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// 外部ファイル読み込み
+import lt._
+
+val a = new mod
+a.pon
+
+
+/*
+// trait
+trait moduler {
+  def pri = {
+    println("module!")
+  }
+}
+
+println("triant")
+
+class a extends moduler
+val b = new a
+b.pri
+*/
+
 
 
 /*
