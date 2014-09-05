@@ -1,7 +1,4 @@
 /*
-*/
-/*
-
 object tmp { def main(args: Array[String]): Unit = {
 }}
 */
@@ -9,12 +6,23 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
+
+
+/*
+
+*/
+
+
+/*
+
 // 外部ファイル読み込み
-import lt._
+import module._
 
-val a = new mod
+val a = new mod()
 a.pon
-
+*/
 
 /*
 // trait

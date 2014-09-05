@@ -10,3 +10,17 @@
 // -----------------------------------------------------------------------------
 // 計測開始
 // 計測終了
+
+
+import checklinkmodule._
+
+object slc { def main(args: Array[String]): Unit = {
+
+
+println(CheckLinkModule.check_uri("http://yahoo.co.jp"))
+
+
+}}
+
+
+
