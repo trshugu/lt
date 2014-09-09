@@ -7,16 +7,159 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
-
-
-
 /*
-
+// list delete
+var l = new collection.mutable.ListBuffer[String]
+l.append("test")
+l.append("tesaft")
+l.append("tefefeft")
+l.append("tesaft")
+println(l)
+//println(l--=List("tesaft"))
+l = l.filterNot(i=>i=="tesaft")
+println(l)
 */
 
 
 /*
+// JavaConversions
+import scala.collection.JavaConversions._
 
+val al: java.util.ArrayList[String] = new java.util.ArrayList
+al.add("test")
+al.add("tsdf")
+al.add("tssddef")
+al.add("test")
+println(al.get(0))
+println(al.size)
+println(al.indexOf("test"))
+al.foreach { 
+  println(_)
+}
+*/
+
+
+/*
+// scala List系
+val lb = new collection.mutable.ListBuffer[String]
+lb.append("test")
+lb.append("tesaft")
+lb.append("tefefeft")
+lb.append("test")
+lb.foreach { 
+  println(_)
+}
+
+
+val hm = new collection.mutable.HashMap[String,String]
+println(hm.update("aa","bbb"))
+hm.update("tfeetk","bbb")
+println(hm.update("aa","bbb"))
+println(hm.put("testk","tstv"))
+hm.put("tfeetk","tsdfdstv")
+hm.put("tsdfsdftk","tesafstv")
+println(hm.put("testk","teestv"))
+hm.update("tfeetk","ooo")
+hm.put("tfeetk","eee")
+println(hm.size)
+println(hm.get("testk"))
+println(hm.contains("testk"))
+hm.foreach { i =>
+  println(i._1 + ":" + i._2)
+}
+*/
+
+
+
+/*
+// java List系
+//val jl: java.util.List[String] = new java.util.List
+
+// 配列
+val al: java.util.ArrayList[String] = new java.util.ArrayList
+al.add("test")
+al.add("tsdf")
+al.add("tssddef")
+al.add("test")
+println(al.get(0))
+println(al.size)
+println(al.indexOf("test"))
+for(i <- 0 until al.size)
+  println(al.get(i))
+
+
+// 挿入削除が高速な配列
+val ll: java.util.LinkedList[String] = new java.util.LinkedList
+ll.add("test")
+ll.add("tsdf")
+ll.add("tssddef")
+ll.add("test")
+println(ll.get(0))
+println(ll.size)
+println(ll.indexOf("test"))
+for(i <- 0 until ll.size)
+  println(ll.get(i)) // getはArrayが高速
+
+
+// 重複しない順不同
+val hs: java.util.HashSet[String] = new java.util.HashSet
+hs.add("test")
+hs.add("tsdf")
+hs.add("tssddef")
+hs.add("test")
+println(hs.size)
+println(hs.contains("test"))
+val it = hs.iterator
+while(it.hasNext)
+  println(it.next)
+
+// 重複しないソート
+val ts: java.util.TreeSet[String] = new java.util.TreeSet
+ts.add("test")
+ts.add("tsdf")
+ts.add("tssddef")
+ts.add("test")
+println(ts.size)
+println(ts.contains("test"))
+val it = ts.iterator
+while(it.hasNext)
+  println(it.next)
+
+// kvp
+val hm: java.util.HashMap[String,String] = new java.util.HashMap
+hm.put("testk","testv")
+hm.put("tfeetk","tsdfdstv")
+hm.put("tsdfsdftk","tesafstv")
+hm.put("testk","teestv")
+println(hm.size)
+println(hm.get("testk"))
+println(hm.containsKey("testk"))
+val it = hm.keySet.iterator
+while(it.hasNext) {
+  val o = it.next
+  println(o + ":" + hm.get(o))
+}
+
+
+// kvpでソート
+val tm: java.util.TreeMap[String,String] = new java.util.TreeMap
+tm.put("testk","testv")
+tm.put("tfeetk","tsdfdstv")
+tm.put("tsdfsdftk","tesafstv")
+tm.put("testk","teestv")
+println(tm.size)
+println(tm.get("testk"))
+println(tm.containsKey("testk"))
+val it = tm.keySet.iterator
+while(it.hasNext) {
+  val o = it.next
+  println(o + ":" + tm.get(o))
+}
+*/
+
+
+
+/*
 // 外部ファイル読み込み
 import module._
 
