@@ -12,7 +12,6 @@ object slc { def main(args: Array[String]): Unit = {
 
 // logger作成
 val log = new FileWriter("log.txt", true)
-log.write("hell...\n")
 
 // テキストを読み込む
 if (args.length != 1) {
@@ -21,10 +20,11 @@ if (args.length != 1) {
 }
 
 val file = args(0)
-
 val f = new File(file)
-if(f.exists == false) sys.exit()
-
+if(f.exists == false){
+  log.write("file nothing")
+  sys.exit()
+}
 // 結果ファイル名(同じファイル名が存在していたら削除)
 val resultfile = "zzresult_" + file
 val r = new File(resultfile)

@@ -7,6 +7,22 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// log出力
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+println("sadf")
+
+// logback
+val logtest = LoggerFactory.getLogger("tmpp")
+
+logtest.debug("Hello Logger");
+
+logtest.error("普通にやばいログ　　");
+logtest.warn( "ちょっとやばいログ　");
+logtest.info( "運用時に必要なログ　");
+
+
 /*
 // list delete
 var l = new collection.mutable.ListBuffer[String]
