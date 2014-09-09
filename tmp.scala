@@ -6,21 +6,42 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
-
+/*
 // log出力
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+*/
 
-println("sadf")
+import org.slf4j.LoggerFactory
+import ch.qos.logback.core.Appender
+import ch.qos.logback.core.FileAppender
+import ch.qos.logback.core.encoder.Encoder
+import ch.qos.logback.core.encoder.LayoutWrappingEncoder
+import ch.qos.logback.classic.Logger
+import ch.qos.logback.classic.LoggerContext
+import ch.qos.logback.classic.spi.ILoggingEvent
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.classic.spi.LoggingEvent
 
-// logback
-val logtest = LoggerFactory.getLogger("tmpp")
+val logger = LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME).asInstanceOf[Logger]
 
-logtest.debug("Hello Logger");
+val fa = new FileAppender[ILoggingEvent]
+fa.setContext(logger.getLoggerContext)
+fa.setFile("fa.log")
+fa.setAppend(true)
 
-logtest.error("普通にやばいログ　　");
-logtest.warn( "ちょっとやばいログ　");
-logtest.info( "運用時に必要なログ　");
+val e = new LayoutWrappingEncoder[ILoggingEvent]
+e.setImmediateFlush(true)
+e.start()
+fa.setEncoder(e)
+fa.start()
+
+logger.addAppender(fa)
+logger.error("to hell")
+logger.warn("to hell")
+logger.debug("to hell")
+logger.trace("to hell")
+
+//appender.setLayout(layout)
+
 
 
 /*
