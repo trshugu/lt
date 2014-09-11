@@ -5,11 +5,28 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// jar作成
+object tmp {
+def main(args: Array[String]): Unit = {
+  println("testi")
+}
+
+println("lkjsdf")
+main(Array("asf"))
+}
+
+
+object tmp {
+  def main(args: Array[String]): Unit = {
+    println("jaaraa")
+  }
+}
+*/
+
 
 /*
 // log出力
-*/
-
 import org.slf4j.LoggerFactory
 import ch.qos.logback.core.Appender
 import ch.qos.logback.core.FileAppender
@@ -41,6 +58,8 @@ logger.debug("to hell")
 logger.trace("to hell")
 
 //appender.setLayout(layout)
+*/
+
 
 
 

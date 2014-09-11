@@ -1,6 +1,6 @@
 import AssemblyKeys._
 
-name := "tmp"
+name := "slc"
 
 version := "0.0"
 
