@@ -25,13 +25,10 @@ class act extends Actor {
 
 println("start")
 
-(0 to 3).foreach{i=>
 val as = ActorSystem.create
 val ref = as.actorOf( Props(new act()) )
-val ref2 = as.actorOf( Props(new act()) )
-
-ref ! "rec"
-ref2 ! "rec"
+(0 to 1000).foreach{i=>
+  ref ! "rec"
 }
 //as.shutdown()
 
