@@ -1,12 +1,14 @@
+import akka.actor
+import akka.actor._
 import checklinkmodule._
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File
 import java.io.FileWriter
 import java.io.PrintWriter
-//import java.util._
 import scala.io.Source
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeUnit
+
 
 object slc { def main(args: Array[String]): Unit = {
 
@@ -62,9 +64,11 @@ result.write(urllist.size + "件\n")
 val starttime = System.currentTimeMillis();
 
 // チェック
+val system = ActorSystem("as")
+val act = system.actorOf(Props(new CheckLinkActor(resultfile)))
+
 urllist.foreach { uri =>
-  val checked_uri = CheckLinkModule.check_uri(uri)
-  result.write(checked_uri)
+  act ! uri
 }
 
 
@@ -74,7 +78,20 @@ val endtime = System.currentTimeMillis();
 println("done " + (endtime - starttime))
 log.write((endtime - starttime) + "\n")
 log.close
+
 }}
 
-
+class CheckLinkActor(file: String) extends Actor {
+  val filename = file
+  
+  def receive = {
+    case x:String =>
+      val checked_uri = CheckLinkModule.check_uri(x.toString)
+      val result = new FileWriter(filename,true)
+      result.write(checked_uri)
+      result.close
+    case Terminated =>
+      println("temr")
+  }
+}
 

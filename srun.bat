@@ -1,6 +1,6 @@
 @echo off
 
-scala -classpath ^
+scala -deprecation -classpath ^
 ./;^
 :./lib/dispatch-core_2.10-0.11.1.jar;^
 :./lib/jedis-2.4.1.jar;^

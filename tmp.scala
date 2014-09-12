@@ -5,6 +5,45 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
+
+// 並行処理3
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit;
+
+class act extends Actor {
+  println("ueue")
+  def receive = {case x =>
+    println("acti:" + x)
+    TimeUnit.MILLISECONDS.sleep(1000)
+    println("acte:" + x)
+  }
+  println("sita")
+}
+
+println("start")
+
+(0 to 3).foreach{i=>
+val as = ActorSystem.create
+val ref = as.actorOf( Props(new act()) )
+val ref2 = as.actorOf( Props(new act()) )
+
+ref ! "rec"
+ref2 ! "rec"
+}
+//as.shutdown()
+
+println("end")
+
+//val a = ActorSystem.create
+//val b = a.actorOf(Props(println("tyabarake")))
+//b ! 1
+
+
+
+
 /*
 // jar作成
 object tmp {
