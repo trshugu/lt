@@ -7,8 +7,25 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// java標準logging
+import java.util.logging._
 
-// 並行処理3
+val l = Logger.getLogger("lll")
+l.info("ininin")
+
+val fh = new FileHandler("log.txt")
+
+val format = new XMLFormatter()
+fh.setFormatter(format)
+l.addHandler(fh)
+l.info("ininin")
+println("tesa")
+*/
+
+
+/*
+// 並行処理3 値の返却 ->NG 値を戻すという考え方が古い
 import akka.actor
 import akka.actor._
 import java.util.concurrent.TimeUnit;
@@ -37,7 +54,7 @@ println("end")
 //val a = ActorSystem.create
 //val b = a.actorOf(Props(println("tyabarake")))
 //b ! 1
-
+*/
 
 
 
