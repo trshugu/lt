@@ -8,6 +8,142 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// 並行処理 Master/Slave -> 失敗
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class master extends Actor {
+  def receive = {case x =>
+    println("Mstart")
+    println(x)
+    
+    val s = as.actorOf(Props(new slave()))
+    val lb = new collection.mutable.ListBuffer[ActorRef]
+    
+    lb.append(s)
+    lb.append(s)
+    lb.append(s)
+    
+    lb.foreach {
+      _ ! "deach"
+    }
+    //TimeUnit.MILLISECONDS.sleep(1000)
+    //as.shutdown
+    println("Mend")
+  }
+}
+
+class slave extends Actor {
+  def receive = {case x =>
+    println("Sstart")
+    println(x)
+    TimeUnit.MILLISECONDS.sleep(1000)
+    println("Send")
+  }
+}
+
+
+val as = ActorSystem.create
+val m = as.actorOf( Props(new master()) )
+m ! "uri"
+*/
+
+
+
+/*
+// 並行処理 ActorからActor呼び出し
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class ichi extends Actor {
+  def receive = {case x =>
+    println("ichistart")
+    println(x)
+    TimeUnit.MILLISECONDS.sleep(1000)
+    fact.ni ! "death"
+    println("ichiend")
+  }
+}
+
+class ni extends Actor {
+  def receive = {case x =>
+    println("nistart")
+    println(x)
+    TimeUnit.MILLISECONDS.sleep(1000)
+    fact.san ! "lives"
+    println("niend")
+  }
+}
+
+class san extends Actor {
+  def receive = {case x =>
+    println("sanstart")
+    println(x)
+    TimeUnit.MILLISECONDS.sleep(1000)
+    fact.as.shutdown
+    println("sanend")
+  }
+}
+
+object fact {
+  println("rebirth")
+  val as = ActorSystem.create
+  val ichi = as.actorOf( Props(new ichi()) )
+  val ni = as.actorOf( Props(new ni()) )
+  val san = as.actorOf( Props(new san()) )
+}
+
+println("start")
+fact.ichi ! "go"
+println("end")
+*/
+
+
+/*
+// 並行処理4 future -> NG ?が使えない
+import akka.actor
+import akka.actor._
+import akka.pattern._
+import java.util.concurrent.TimeUnit
+import scala.concurrent.Await
+import akka.util.Timeout
+
+class act extends Actor {
+  println("ueue")
+  def receive = {case x =>
+    println("acti:" + x)
+    TimeUnit.MILLISECONDS.sleep(1000)
+    println("acte:" + x)
+    sender ! "sensensen"
+  }
+
+  println("sita")
+}
+
+println("start")
+
+val as = ActorSystem.create
+val ref = as.actorOf( Props(new act()) )
+//(0 to 1000).foreach{i=>
+  val f = ref ! "rec"
+  println(f.getClass)
+  //f.onSuccess {
+  //  case (sss: String) => println(sss)
+  //} 
+//}
+as.shutdown()
+
+println("end")
+
+//val a = ActorSystem.create
+//val b = a.actorOf(Props(println("tyabarake")))
+//b ! 1
+*/
+
+
+/*
 // java標準logging
 import java.util.logging._
 
