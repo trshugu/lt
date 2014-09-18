@@ -16,7 +16,7 @@ class master extends Actor {
   
   def receive = {
     case "uri" =>
-      (1 to 100000).foreach {i=>
+      (1 to 100).foreach {i=>
         val s = as.actorOf( Props(new slave()) )
         task += 1
         s ! i
@@ -37,10 +37,10 @@ class slave extends Actor {
   def receive = {
     case x: Integer =>
       if (x % 10000 == 0){
-        println(x)
+        //println(x)
       }
       //println("nanigasikanosyori")
-      m ! "plus"
+      sender ! "plus"
       //TimeUnit.MILLISECONDS.sleep(1000)
   }
 }
