@@ -4,7 +4,237 @@ object tmp { def main(args: Array[String]): Unit = {
 */
 
 
+/*
+// 並行処理 checker2
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
 
+class master extends Actor {
+  var task = 0
+  var done = 0
+  
+  def receive = {
+    case "uri" =>
+      (1 to 100000).foreach {i=>
+        val s = as.actorOf( Props(new slave()) )
+        task += 1
+        s ! i
+      }
+    case "check" =>
+      println("task:" + task)
+      println("done:" + done)
+      if (done>=task){
+        println("shutdown")
+        as.shutdown
+      }
+    case "plus" =>
+      done += 1
+  }
+}
+
+class slave extends Actor {
+  def receive = {
+    case x: Integer =>
+      if (x % 10000 == 0){
+        println(x)
+      }
+      //println("nanigasikanosyori")
+      m ! "plus"
+      //TimeUnit.MILLISECONDS.sleep(1000)
+  }
+}
+
+val as = ActorSystem.create
+val m = as.actorOf( Props(new master()) )
+m ! "uri"
+//as.shutdown
+while(as.isTerminated == false){
+  println("check")
+  m ! "check"
+  TimeUnit.MILLISECONDS.sleep(2000)
+}
+*/
+
+
+
+/*
+// 並行処理 checker
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class master extends Actor {
+  def receive = {
+    case x =>
+      val s = as.actorOf( Props(new slave()) )
+      s ! "plu"
+  }
+}
+
+class slave extends Actor {
+  def receive = {
+    case x =>
+      c ! "plus"
+      c ! "plus"
+      c ! "plus"
+      c ! "plus"
+      c ! "plus"
+      c ! "plus"
+  }
+}
+
+class checker extends Actor {
+  var cnt = 0
+  def receive = {
+    case "check" =>
+      if (cnt>5)
+        println("shutdown")
+        as.shutdown
+    case "plus" =>
+      cnt += 1
+  }
+}
+
+val as = ActorSystem.create
+val m = as.actorOf( Props(new master()) )
+val c = as.actorOf( Props(new checker()) )
+m ! "uri"
+//as.shutdown
+while(as.isTerminated == false){
+  println("check")
+  c ! "check"
+  TimeUnit.MILLISECONDS.sleep(1000)
+}
+*/
+
+
+/*
+// 並行処理 Master/Slave2
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class master extends Actor {
+  def receive = {
+    case x =>
+      (0 to 2).foreach{i=>
+        t ! "plus"
+        val s = as.actorOf( Props(new slave()) )
+        s ! "mimi"
+      }
+      
+      
+  }
+}
+
+class slave extends Actor {
+  def receive = {case x =>
+    t ! "minus"
+  }
+}
+
+class term extends Actor {
+  var cnt = 0
+  def receive = {
+    case "plus" =>
+      cnt = cnt + 1
+      println("plus:" + cnt)
+    case "minus" =>
+      cnt = cnt - 1
+      println("minus:" + cnt)
+    case "get" =>
+      println("get:" + cnt)
+  }
+}
+
+val as = ActorSystem.create
+val m = as.actorOf( Props(new master()) )
+val t = as.actorOf( Props(new term()) )
+m ! "uri"
+//as.shutdown
+*/
+
+
+
+/**
+// 自分自身へのメッセージ送信
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class a extends Actor {
+  def receive = {
+    case "ichi" =>
+      println("1s")
+      a ! "ni"
+      println("1e")
+    case "ni" =>
+      println("2s")
+      a ! "san"
+      //as.shutdown
+      TimeUnit.MILLISECONDS.sleep(1000)
+      println("2e")
+    case "san" =>
+      println("3s")
+      as.shutdown
+      TimeUnit.MILLISECONDS.sleep(5000)
+      println("3e")
+  }
+}
+
+val as = ActorSystem.create
+val a = as.actorOf( Props(new a()) )
+a ! "ichi"
+*/
+
+
+/*
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class a extends Actor {
+  def receive = {
+    case "st"=>
+      r ! "r"
+      while(true){
+        c ! "death"
+        TimeUnit.MILLISECONDS.sleep(1000)
+      }
+  }
+}
+
+class reeper extends Actor {
+  def receive = {
+    case x =>
+      (0 to 19).foreach{i=>
+        c ! "plus"
+      }
+  }
+}
+
+class counter extends Actor {
+  var cnt = 0
+  def receive = {
+    case "plus" =>
+      cnt += 1
+    case "death" =>
+      println("death" + cnt)
+      if (cnt > 5) {
+        println("shutdorn")
+        as.shutdown
+      }
+  }
+}
+
+
+val as = ActorSystem.create
+val a = as.actorOf( Props(new a()) )
+val r = as.actorOf( Props(new reeper()) )
+val c = as.actorOf( Props(new counter()) )
+a ! "st"
+*/
 
 
 /*
