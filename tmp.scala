@@ -18,7 +18,7 @@ class master extends Actor {
       println("maindesu")
       //TimeUnit.MILLISECONDS.sleep(1000)
       //sender ! "res"
-      sender ! 1
+      self ! 1
   }
 }
 
