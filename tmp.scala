@@ -4,6 +4,86 @@ object tmp { def main(args: Array[String]): Unit = {
 */
 
 
+
+/*
+*/
+// receive
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class master extends Actor {
+  def receive = {
+    case x =>
+      println("maindesu")
+      //TimeUnit.MILLISECONDS.sleep(1000)
+      //sender ! "res"
+      sender ! 1
+  }
+}
+
+implicit val as = ActorSystem.create
+
+val rootInbox = ActorDSL.inbox()
+
+//val m = as.actorOf( Props(new master()) )
+
+println("sending")
+(0 to 100).foreach{i=>
+  val m = as.actorOf( Props(new master()) )
+  rootInbox.send(m, "main")
+}
+
+println("receiven")
+(0 to 100).foreach{i=>
+  println("rere:" + rootInbox.receive().getClass)
+}
+println("downer")
+
+//m ! "main"
+as.shutdown
+
+
+
+/*
+// sender
+import akka.actor
+import akka.actor._
+import java.util.concurrent.TimeUnit
+
+class master extends Actor {
+  var task = 0
+  var done = 0
+  
+  def receive = {
+    case "main" =>
+      println("maindesu")
+      sender ! "sub"
+    case "sub" =>
+      println("subdesu")
+      //as.shutdown
+  }
+}
+
+implicit val as = ActorSystem.create
+val m = as.actorOf( Props(new master()) )
+val rootInbox = ActorDSL.inbox()
+rootInbox.send(m, "main")
+TimeUnit.MILLISECONDS.sleep(1000)
+println("rere:" + rootInbox.receive())
+TimeUnit.MILLISECONDS.sleep(1000)
+
+rootInbox.send(m, "sub")
+TimeUnit.MILLISECONDS.sleep(1000)
+println("rere:" + rootInbox.receive())
+TimeUnit.MILLISECONDS.sleep(1000)
+
+//m ! "main"
+as.shutdown
+*/
+
+
+
 /*
 // 並行処理 checker2
 import akka.actor
