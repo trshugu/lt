@@ -6,7 +6,6 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
-*/
 // receive
 import akka.actor
 import akka.actor._
@@ -43,6 +42,7 @@ println("downer")
 
 //m ! "main"
 as.shutdown
+*/
 
 
 
