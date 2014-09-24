@@ -1,8 +1,6 @@
 import akka.actor
 import akka.actor._
 import checklinkmodule._
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.io.File
 import java.io.FileWriter
 import java.io.PrintWriter
@@ -11,7 +9,6 @@ import java.util.concurrent.TimeUnit
 
 
 object slc { def main(args: Array[String]): Unit = {
-
 // logger作成
 val log = new FileWriter("log.txt", true)
 
@@ -63,6 +60,7 @@ result.write(urllist.size + "件\n")
 // 計測開始
 val starttime = System.currentTimeMillis();
 
+/*
 // チェック
 val system = ActorSystem("as")
 val act = system.actorOf(Props(new CheckLinkActor(resultfile)))
@@ -70,6 +68,21 @@ val act = system.actorOf(Props(new CheckLinkActor(resultfile)))
 urllist.foreach { uri =>
   act ! uri
 }
+*/
+
+implicit val as = ActorSystem.create
+val inbox = ActorDSL.inbox()
+
+urllist.foreach { uri =>
+  val clmActor = as.actorOf( Props(new CheckLinkModule()) )
+  inbox.send(clmActor, uri)
+}
+
+urllist.foreach { uri =>
+  result.write(inbox.receive().toString)
+}
+
+as.shutdown
 
 
 // 計測終了
@@ -81,6 +94,8 @@ log.close
 
 }}
 
+
+/*
 class CheckLinkActor(file: String) extends Actor {
   val filename = file
   
@@ -94,4 +109,4 @@ class CheckLinkActor(file: String) extends Actor {
       println("temr")
   }
 }
-
+*/

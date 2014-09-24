@@ -5,6 +5,10 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
+
+
 /*
 // receive
 import akka.actor
@@ -14,11 +18,13 @@ import java.util.concurrent.TimeUnit
 class master extends Actor {
   def receive = {
     case x =>
+    {
       println("maindesu")
       //TimeUnit.MILLISECONDS.sleep(1000)
       //sender ! "res"
       sender ! 1
       //self ! 1
+    }
   }
 }
 
@@ -28,15 +34,17 @@ val rootInbox = ActorDSL.inbox()
 
 //val m = as.actorOf( Props(new master()) )
 
+val f = 10
+
 println("sending")
-(0 to 100).foreach{i=>
+(0 to f).foreach{i=>
   val m = as.actorOf( Props(new master()) )
   rootInbox.send(m, "main")
 }
 
 println("receiven")
-(0 to 100).foreach{i=>
-  println("rere:" + rootInbox.receive().getClass)
+(0 to f).foreach{i=>
+  println("rere:" + rootInbox.receive())
 }
 println("downer")
 
