@@ -4,8 +4,22 @@ object tmp { def main(args: Array[String]): Unit = {
 */
 
 
+// RxJava
+import rx.lang.scala.Observable
+
+object tmp {
+
+def hello(names: String*) {
+  Observable.from(names) subscribe { n =>
+    println(s"Hello $n!")
+  }
+}
 
 
+def main(args: Array[String]): Unit = {
+  println("asfs")
+  hello("Ben", "George")
+}}
 
 
 

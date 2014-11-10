@@ -6,6 +6,8 @@ version := "0.0"
 
 scalaVersion := "2.11.1"
 
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.20.6"
+
 libraryDependencies ++= Seq(
   //"net.databinder.dispatch" %% "dispatch-core" % "0.11.2",
   //"org.scalatra" %% "scalatra" % "2.3.0"
