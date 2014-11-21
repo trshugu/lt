@@ -4,6 +4,358 @@ object tmp { def main(args: Array[String]): Unit = {
 */
 
 
+
+
+/*
+// lazy val はJVM上ではメソッドとして定義される
+class MyClass {
+  def hoge1: Int = {
+    val x = 1
+    lazy val y = 1
+    x + y
+  }
+
+  def hoge2: Int = {
+    val x = 1
+    lazy val y = 1
+    x + y
+  }
+}
+*/
+
+/*
+// => はJVM上では関数オブジェクト
+class MyTest {
+  def hoge1(x: Int) = x + 1
+  def hoge2(x: => Int) = x + 1
+  def hoge3(x: () => Int) = x() + 1
+}
+*/
+
+
+/*
+// defの定義で、引数なしと空括弧は微妙に違う
+def func1 = (_: Int) + 1
+def func2() = (_: Int) + 1
+
+// 引数無しで定義すると"func1()"では呼び出せない
+println(func1)
+// println(func1())
+
+// 空括弧で定義すると"func2()"でも"func2"でも呼び出せる
+println(func2)
+println(func2())
+
+// func1は括弧付きで呼び出せないので、意図したように解釈される
+func1(5)
+
+// func2を5を引数として呼び出したと解釈されるため、エラーとなる
+// func2(5)
+func2()(5)
+*/
+
+/*
+// メソッドと関数型のフィールドは違う
+// 名前付き引数で呼べる
+def hoge(x: String): Int = x.length
+println(hoge("abcde"))  // ←一見同じ振る舞いをするように見える
+println(hoge(x = "abcde"))
+
+// 名前付き引数で呼べない
+def huga: String => Int = x => x.length
+println(huga("abcde"))  // ←一見同じ振る舞いをするように見える
+
+// hoge(x = "abcde")
+
+// 引数には自動的に名前がつく (コメント欄参照)
+println(huga(v1 = "abcde"))
+
+// 後者はfunctionオブジェクトを返す
+class MyTest {
+  def hoge1(x: String): Int = x.length
+  def hoge2: String => Int = x => x.length
+}
+*/
+
+
+
+/*
+object ValVarDef {
+  val x = 1
+  var y = 2
+  def z = 3
+}
+
+println(ValVarDef.x)
+println(ValVarDef.y)
+println(ValVarDef.z)
+*/
+
+/*
+// def val
+def func(a:String):(String)=a
+
+println(func("yuda"))
+// println(func)
+
+val vanc = (a:String) => a
+println(vanc("yuda"))
+println(vanc)
+*/
+
+
+/*
+// apply
+val ooo = (s:String)=>{println(s)}
+ooo.apply("ei")
+ooo("mem")
+
+
+object obu {
+  val aaa= (e:String)=>{println(e)}
+  // def apply = (e:String)=>{println(e+"kari")}
+  val apply = (e:String)=>{println(e+"ote")}
+}
+
+obu.aaa("isu")
+obu.apply.apply("isu")
+*/
+
+/*
+// コンパニオンオブジェクトは関数
+case class A(n: Int)
+
+val f: Int => A = A
+
+println(f(1))
+*/
+
+/*
+// アクセスできない
+class B {
+  def method(n: Int) = A.method(n)
+ 
+  private val a = 1
+}
+ 
+object A {
+  private def method(n: Int) = n * 2
+ 
+  val i = {
+    val a = new B
+    a.a
+  }
+}
+
+println(A.i)
+*/
+
+
+/*
+class companion{
+  val vvv = "saf"
+  def ooo = ()=>{println("class")}
+  def func(n:String):String = {n + "claaa"}
+  def apply():companion ={new companion()}
+// def clasu ={companion().vvv}
+  def clasu ={companion.vvv}
+}
+
+object companion {
+  val vvv = "jijij"
+  def ooo = ()=>{println("object")}
+  def func(n:String):String = {n + "obuuuuu"}
+  def claaa = ()=>{
+    val nai = new companion()
+    println(nai.clasu)
+  }
+  def apply():companion ={new companion()}
+}
+
+companion.claaa()
+*/
+
+/*
+println(companion.func("rin"))
+println(companion().func("rin"))
+println(new companion().func("rin"))
+println(companion.func(""))
+*/
+
+/*
+def func(n:String):String = {
+  n
+}
+
+println(func("rin"))
+*/
+
+/*
+class companion{
+  val vvv = "saf"
+  def ooo = ()=>{println("class")}
+  def apply():companion ={return new companion()}
+}
+
+object companion {
+  val vvv = "jijij"
+  def ooo = ()=>{println("object")}
+  
+  def apply():companion ={return new companion()}
+}
+
+val c = new companion()
+c.ooo()
+companion.ooo()
+
+println(c.vvv)
+println(companion.vvv)
+
+val a = companion.apply()
+a.ooo()
+println(a.vvv)
+
+val b = companion()
+b.ooo()
+println(b.vvv)
+
+println(companion.vvv)
+println(companion().vvv)
+
+println(companion.ooo())
+println(companion().ooo())
+
+println(companion.ooo)
+*/
+
+
+
+// val d = companion.ttt()
+
+// companion("compa")
+
+
+/*
+// Action解析
+object Tree {
+  def pre = {(str:String)=>
+    println("module!")
+  }
+  
+  def apply = ()=>{
+    println("apply!")
+  }
+}
+
+
+// def in = Tree.apply("bom")
+//def in = Tree("bom")
+//in
+
+// Tree.apply("bom")
+// Tree("bom")
+Tree.apply()
+// Tree()
+
+// in.pre("nanika")
+*/
+
+
+/*
+// 65536
+val kasi = (a:Int)=> println(a + a)
+(1 to 10).foreach{i=>kasi(i)}
+*/
+
+
+/*
+// 遅延評価
+def message(str: String): String = {
+  println("Called!")
+  str + "!"
+}
+lazy val str = message("World")
+val str2 = message("hell")
+println("Before lazy val...")
+println(str)
+println(str2)
+*/
+
+/*
+// クロージャ
+object CounterFactory
+{
+  def create(): (Int) => Int =
+  {
+    var i = 0
+    (j:Int) =>
+    {
+      i += j
+      i
+    }
+  }
+}
+
+val c1 = CounterFactory.create()
+println(c1(1)) // 1
+println(c1(1)) // 2
+val c2 = CounterFactory.create()
+println(c2(2)) // 2
+println(c2(2)) // 4
+*/
+
+
+/*
+// 関数3
+val kaki = (a:String)=>a
+println( kaki("kaki")  )
+
+def unini(s:String) : Unit = println(s)
+
+unini("nitani")
+
+val p = (str: String) => println(str)
+val repeat = (printer: (String) => Unit, times: Int) => {
+  (str: String) => 1 to times foreach ( _ => printer(str) )
+}
+val twice_p = repeat(p,2)
+twice_p("test")
+
+List(3,2,4,6,1,5).sortWith({ (a,b) => a < b }).foreach({ (n) => println(n*n) })
+List(3,2,4,6,1,5) sortWith { (a, b) => a < b } foreach { n => println(n*n) }
+List(3,2,4,6,1,5) sortWith(_<_) foreach { n => println(n*n) } 
+*/
+
+
+/*
+// 関数2
+def add(a:Int,b:Int) = {a+b}
+val add2= {(a:Int,b:Int) => a + b}
+val add3:Int=>Int=>Int = {a => b => a + b}
+
+println(add(2,3))
+println(add2(2,3))
+println(add3(2)(3))
+
+val add4 = (a:Int,b:Int) => a + b
+println(add4(2,3))
+*/
+
+
+/*
+// 関数
+def fact(n:Int):Int = {
+  if (n == 1) {1} else {(n * fact(n-1))}
+}
+
+println(fact(4))
+
+def chie(a:String):String = "modori" + a
+
+println(chie("hiki"))
+*/
+
+/*
 // RxJava
 import rx.lang.scala.Observable
 
@@ -21,7 +373,7 @@ def main(args: Array[String]): Unit = {
   hello("Ben", "George")
 }}
 
-
+*/
 
 /*
 // receive
