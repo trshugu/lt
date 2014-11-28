@@ -3,8 +3,82 @@ object tmp { def main(args: Array[String]): Unit = {
 }}
 */
 
+/*
+// val s:(String) => Unit =(a:String) => {println(a)}
+
+// コードブロックの中括弧{}を省略
+//val s:(String) => Unit =(a:String) => println(a)
+
+// 思い切って関数の型を省略
+// val s =(a:String) => {println(a)}
+
+// s("prin")
+
+// 引数なしの関数はこれ
+val s:() => Unit = () => println("bon")
+s()
+*/
+
+/*
+// 関数リテラルの書き方
+// Stringを引数に取りUnitを返す
+(s: String) => {}: Unit
+(s: String) => {}
+
+// Stringを引数に取りStringを返す
+(s: String) => {""}: String
+(s: String) => {""}
+(s: String) => ""
+
+// Intの引数を２つ取り和を返す
+(x: Int, y: Int) => x + y
+
+// メソッドに関数リテラルを渡す
+def fnc1(f: Int => Int): Int = {f(1)}
+
+fnc1((n: Int) => n + 1)
+
+// メソッド側に型の定義があるので省略できる
+fnc1(n => n + 1)
+
+// プレースホルダーを使う
+fnc1(_ + 1)
+
+val fun =(s:String)=> {println(s)}
+fun("sdf")
+*/
 
 
+/*
+// def 関数名(変数名:型): 戻り値の型 = {}
+def add1(x: Int, y: Int): Int = {x + y}
+
+// 戻り値の型は省略できる
+def add2(x: Int, y: Int) = {x + y}
+def add3(x: Int, y: Int) = x + y
+
+// ＝も省略（{}が必要）
+def add4(x: Int, y: Int) {x + y}
+
+// 戻り値がない関数定義
+def out1(s: String): Unit = {println(s)}
+def out2(s: String) = println(s)
+def out3(s: String) {println(s)}
+
+// 関数を引数に取る関数
+def fnc1(f: Int => Int): Int = {f(1)}
+def fnc2(f: (Int, String) => Int): Int = {f(1, "2")}
+
+// 引数の無い関数
+def noArgs1() {}
+def noArgs2 {}
+
+// 関数を返す関数
+def retFnc1(): String => String = (s: String) => "return " + s
+
+val kansu = retFnc1()
+println(kansu("this"))
+*/
 
 /*
 // lazy val はJVM上ではメソッドとして定義される
