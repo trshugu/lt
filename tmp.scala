@@ -3,6 +3,33 @@ object tmp { def main(args: Array[String]): Unit = {
 }}
 */
 
+
+
+
+
+
+
+
+/*
+// stream 2
+def from(n:Int):Stream[Int] = Stream.cons( n, from(n+1) )
+println(from(0).filter(x => x<10 ).take(10).length)
+*/
+
+/*
+// stream
+def from(n:Int):Stream[Int] = Stream.cons( n, from(n+1) )
+
+val infs = from(0)
+
+val filts = infs.filter(x => x<10 )
+
+val takes = filts.take(10)
+
+println(takes.length)
+*/
+
+
 /*
 // val s:(String) => Unit =(a:String) => {println(a)}
 
