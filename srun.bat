@@ -25,3 +25,4 @@ scala -deprecation -classpath ^
 
 rem scala -classpath ./lib/*.jar tmp.scala
 rem sbt run
+
