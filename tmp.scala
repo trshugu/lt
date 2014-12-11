@@ -3,11 +3,53 @@ object tmp { def main(args: Array[String]): Unit = {
 }}
 */
 
+// xmlの出力
 
 
+// xmlの作成2
+val xml = <parent>
+  <child id="a">A</child>
+  <children>
+    <child id="b">B</child>
+  </children>
+  <child id="c">C</child>
+</parent>
+
+// \関数：直下の子要素を抽出
+println(xml \ "child")
+
+// \\関数：再帰的にの子要素を抽出
+println(xml \\ "child")
+
+// 連結して書ける
+println(xml \ "children" \ "child")
+
+// @指定:属性の値を取得
+println(xml \\ "@id")
+val ns = xml \\ "@id"
+ns.foreach{i=>println(i.getClass)}
+
+// すべての要素を指定
+(xml \\ "_").foreach(e => println(e.label.getClass))
 
 
+/*
+// xmlの作成
+import scala.xml.XML
+val ls = XML.loadString("<parent><child>a</child><child>b</child></parent>")
 
+import java.net.URL
+val l = XML.load(new URL("http://bap.dev-cloud.rekochoku.com/bcapi/getTrackInfo/?track_id=30215809,60230461,30216321,30216321"))
+
+println("death")
+println(ls.getClass)
+println(l.getClass)
+
+// コード上に書いてもElemがとれる
+val xml = <parent><child>a</child><child>b</child></parent>
+println(xml)
+println(xml.getClass)
+*/
 
 
 /*
