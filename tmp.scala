@@ -3,9 +3,64 @@ object tmp { def main(args: Array[String]): Unit = {
 }}
 */
 
+
+
+// xml 追加
+val getXml = (value:String)=> {
+  val xml =
+  <root>
+    <vall>
+      {value}
+    </vall>
+  </root>
+  xml
+}
+
+val xml = <root><bon>kure</bon>
+{getXml("anoktar")}
+  </root>
+println(xml.toString)
+
+
+
+/*
+// xmlを返却する関数化
+val getXml = (value:String)=> {
+  val xml =
+  <root>
+    <vall>
+      {value}
+    </vall>
+  </root>
+  xml
+}
+
+println(getXml("bababa"))
+*/
+
+
+/*
 // xmlの出力
+val name = "world"
+val x = <s>hello,{name}</s>
+val n = <s>{ 123 + 456 }</s>
 
+println(x.getClass)
+println(n.getClass)
 
+val s ="""
+  <root>
+    <bon/>
+  </root>
+"""
+
+import scala.xml.XML
+val ls = XML.loadString(s)
+
+println(ls.getClass)
+*/
+
+/*
 // xmlの作成2
 val xml = <parent>
   <child id="a">A</child>
@@ -18,7 +73,7 @@ val xml = <parent>
 // \関数：直下の子要素を抽出
 println(xml \ "child")
 
-// \\関数：再帰的にの子要素を抽出
+// \\関数：再帰的に子要素を抽出
 println(xml \\ "child")
 
 // 連結して書ける
@@ -31,7 +86,7 @@ ns.foreach{i=>println(i.getClass)}
 
 // すべての要素を指定
 (xml \\ "_").foreach(e => println(e.label.getClass))
-
+*/
 
 /*
 // xmlの作成
