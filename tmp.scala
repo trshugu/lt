@@ -5,6 +5,27 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+// ガード節による値変換
+def convert(t:Int):String = {
+  t match {
+    case 1 => "ichi"
+    case 2 => "ni"
+    case 3 => "san"
+    case 4 => "shi"
+    case _ => "death"
+  }
+  //case t if t == "2" => "ni"
+  //case _ => "death"
+}
+
+println(convert(2))
+println(convert(4))
+println(convert(3))
+println(convert(5))
+
+
+/*
 // xml 追加
 val getXml = (value:String)=> {
   val xml =
@@ -20,7 +41,7 @@ val xml = <root><bon>kure</bon>
 {getXml("anoktar")}
   </root>
 println(xml.toString)
-
+*/
 
 
 /*
