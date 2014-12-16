@@ -6,7 +6,179 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
-// ガード節による値変換
+
+/*
+// yammer is scara2java for
+var start = System.currentTimeMillis();
+
+val loop = 2147483647
+var total = 0;
+for(i <- 0 until loop) { 
+  total += i 
+};
+
+var end = System.currentTimeMillis();
+println(end-start);
+println(total);
+
+start = System.currentTimeMillis();
+total = 0;
+var i = 0;
+while(i < loop) { 
+  total += i
+  i=i+1;
+};
+
+end = System.currentTimeMillis();
+println(end-start);
+println(total);
+*/
+
+
+/*
+def fizzbuzz( n:Int ) = { 
+  // 「リストを作る」
+  1 to n
+} filter {
+  // 「合成したり、条件に合わせて絞り込む」
+  n => n % 2 == 0
+} map {
+  // 「個々の要素を加工する」
+  case n if n % 15 == 0 => "FizzBuzz"
+  case n if n % 3  == 0 => "Fizz"
+  case n if n % 5  == 0 => "Buzz"
+  case n                => n.toString 
+} foreach { e => 
+  // 「個々の要素を利用した操作を行う」
+  println( e )
+}
+
+fizzbuzz(10)
+*/
+
+
+/*
+// 数値のmatch
+val i = 3
+i match {
+  case 1 => println("i is 1")
+  case 2 => println("i is 2")
+  case 3 => println("i is 3")
+}
+ 
+97 match {
+  case 'a' => println("match 'a'") //'a'は数値にすると97なので、ここにマッチする。
+  case 'b' => println("match 'b'")
+  case 'c' => println("match 'c'")
+}
+*/
+
+
+
+/*
+// ガード節による値変換6 (リテラルで)
+val convert: (Int) => String = {
+  case 1 => "ichi"
+  case 2 => "ni"
+  case 3 => "san"
+  case 4 => "shi"
+  case _ => "death"
+}
+
+println(convert(2))
+println(convert(4))
+println(convert(3))
+println(convert(5))
+*/
+
+/*
+// ガード節による値変換5 (省略系)
+val convert = {
+  case 1 => "ichi"
+  case 2 => "ni"
+  case 3 => "san"
+  case 4 => "shi"
+  case _ => "death"
+}:( (Any) => Any )
+
+println(convert(2))
+println(convert(4))
+println(convert(3))
+println(convert(5))
+*/
+
+/*
+// ガード節による値変換4 (省略系)
+val convert: (Any) => Any = {
+  case 1 => "ichi"
+  case 2 => "ni"
+  case 3 => "san"
+  case 4 => "shi"
+  case _ => "death"
+}
+
+println(convert(2))
+println(convert(4))
+println(convert(3))
+println(convert(5))
+*/
+
+
+/*
+// ガード節による値変換3 (省略系)
+var convert:(Any)=>Any=null
+
+convert = {
+  //_ match {
+    case 1 => "ichi"
+    case 2 => "ni"
+    case 3 => "san"
+    case 4 => "shi"
+    case _ => "death"
+  }
+
+println(convert(2))
+println(convert(4))
+println(convert(3))
+println(convert(5))
+*/
+
+
+/*
+// ガード節による値変換2 (省略系) これを採用
+def convert(t:Int) = t match {
+  case 1 => "ichi"
+  case 2 => "ni"
+  case 3 => "san"
+  case 4 => "shi"
+  case _ => "death"
+}
+
+println(convert(2))
+println(convert(4))
+println(convert(3))
+println(convert(5))
+*/
+
+
+/*
+// ガード条件 if
+def know(c: Class[_]) = {
+  c match {
+    case x if x==classOf[String] => "文字列"
+    case x if x==classOf[Int]    => "整数"
+    case _                       => "他"
+  }
+}
+
+println(know("saf".getClass))
+println(know(true.getClass))
+println(know(1.getClass))
+println(know(0.1.getClass))
+*/
+
+/*
+// ガード節による値変換(match式)
 def convert(t:Int):String = {
   t match {
     case 1 => "ichi"
@@ -15,15 +187,31 @@ def convert(t:Int):String = {
     case 4 => "shi"
     case _ => "death"
   }
-  //case t if t == "2" => "ni"
-  //case _ => "death"
 }
 
 println(convert(2))
 println(convert(4))
 println(convert(3))
 println(convert(5))
+*/
 
+
+
+/*
+// 型のマッチング
+def know(a: Any) = {
+  a match {
+    case _: String => "文字列"
+    case _: Int    => "整数"
+    case _         => "他"
+  }
+}
+
+println(know("saf"))
+println(know(true))
+println(know(1))
+println(know(0.1))
+*/
 
 /*
 // xml 追加
