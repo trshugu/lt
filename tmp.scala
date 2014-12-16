@@ -8,6 +8,68 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// foreach
+Array(1,2,3,4,5) foreach {
+  println(_)
+}
+
+// map
+val l = Array(1,2,3,4,5) map {
+  _*2
+}
+
+l foreach{println(_)}
+println(l.toString)
+
+
+// filter
+Array(1,2,3,4,5) filter{
+  _ == 3
+} foreach { e => 
+  println(e)
+}
+
+
+// match
+3 match {
+  case 3 => println("san")
+  case _ => println("hoka")
+}
+*/
+
+
+
+/*
+// pipeline
+val fil = (n:Int)=>  { 
+  true
+}
+
+def pl( n:Int ) = { 
+  1 to n
+} filter {
+  fil
+} map {
+  case n if n  == 1 => "ichi"
+  case n if n  == 2 => "ni"
+  case n if n  == 3 => "san"
+  case n            => n.toString 
+} foreach { e => 
+  println( e )
+}
+
+// pl(5)
+//println( {1 to 3} filter{fil} match { case _ => } map{ e => e})
+{1 to 3
+} filter {fil
+} map { e => e
+} match { case a => println(a)}
+//} foreach {b=>println(b) }
+*/
+
+
+
+/*
 // yammer is scara2java for
 var start = System.currentTimeMillis();
 
