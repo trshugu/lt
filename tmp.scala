@@ -6,6 +6,27 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// 今日を取得 YYYY/MM/DD HH24:MI:SS
+import java.text.SimpleDateFormat
+import java.sql.Timestamp
+
+val now = java.util.Calendar.getInstance()
+println( now.get(java.util.Calendar.YEAR) )
+println(System.currentTimeMillis())
+
+val date = "2014/12/25 17:37:30"
+val df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+df.setLenient(false)
+println(df.parse(date))
+val itnow = new Timestamp(System.currentTimeMillis())
+println( itnow.getTime() )
+// println( Timestamp.valueOf(itnow) )
+
+val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+println(sdf.format( itnow ))
+println(df.format( itnow ))
+println(Timestamp.valueOf( itnow.toString ))
 
 /*
 // foreach
