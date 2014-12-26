@@ -6,27 +6,188 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// immutable追加 Map
+val map1 = Map("kkkk" -> "vvv","kkkk2" -> "vvv2")
+val map2 = map1 + ("keyekey"->"ddfd")
+println(map1)
+println(map2 - "kkkk")
+println(map2)
+
+// List
+println(Nil)
+println(("keyekey"->"ddfd") :: Nil)
+*/
+
+
+
+
+/*
+// immutable追加 Set
+val list1 = Set("398")
+val list2 = list1 + "34"
+val list3 = list2 + "34"
+println(list1)
+println(list2)
+println(list3)
+*/
+
+
+/*
+// immutable追加 Seq
+val list1 = Seq(398)
+val list2 = 99 +: list1
+val list3 = list2 :+ "8989"
+println(list1)
+println(list2)
+println(list3)
+*/
+
+
+/*
+// immutable追加 List
+val list1 = List(398)
+val list2 = 99 :: list1
+val list3 = 989 :: list2
+println(list1)
+println(list2)
+println(list3)
+
+val x = List("soijd",2)
+println(x)
+
+val y:List[String] = List("soijd","2",9.toString)
+println(y)
+
+val lBuild = Nil
+val l2 = "ichi"::lBuild
+val l3 = "ni"::l2
+val l4 = "san"::l3
+println(lBuild)
+println(l4)
+println(l4.head)
+println(l4.tail)
+println(l4.isEmpty)
+println(l4.length)
+*/
+
+
+/*
+// Scala Map foreach
+val map = Map("kkkk" -> "vvv","kkkk2" -> "vvv2")
+map.foreach{ kv =>
+  val (k,v) = kv
+  println(k + ":" + v)
+}
+
+map.foreach{ case(k,v) =>
+  ///val (k,v) = kv
+  println(k + ":" + v)
+}
+
+for ( (k,v)<-map ) {
+  println(k + ":" + v)
+}
+
+println(map.keys)
+println(map.keySet)
+println(map.keysIterator)
+
+println(map.values)
+println(map.valuesIterator)
+println(map.map{kv=> kv.getClass})
+*/
+
+/*
+// Scala Map
+println(Map)
+println(Map.getClass)
+
+val rM = scala.collection.mutable.Map("bon"->"asdf")
+rM.put("var","varrr")
+val lM = Map
+println(rM)
+println(lM)
+
+println(Map.empty)
+println(scala.collection.immutable.Map)
+println(scala.collection.immutable.HashMap)
+println(scala.collection.immutable.TreeMap)
+println(scala.collection.immutable.IntMap)
+println(scala.collection.immutable.LongMap)
+println(scala.collection.immutable.ListMap)
+
+println(scala.collection.mutable.Map)
+println(scala.collection.mutable.HashMap)
+println(scala.collection.mutable.LinkedHashMap)
+println(scala.collection.mutable.WeakHashMap)
+println(scala.collection.mutable.ListMap)
+//println(scala.collection.mutable.SynchronizedMap)
+//println(scala.collection.mutable.ConcurrentMap)
+println(scala.collection.concurrent.TrieMap)
+*/
+
+
+/*
+// 文字列->日付
+import java.text.SimpleDateFormat
+import java.util.Date
+
+val df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+df.setLenient(false)
+val date = "2014/12/25 17:37:30"
+println(df.parse(date))
+println( "%tY/%<tm/%<td %<tH:%<tM:%<tS" format df.parse(date) )
+*/
+
+
+/*
+// 今日を取得2
+import java.util.Date
+println( "%tY/%<tm/%<td" format new Date )
+println( "%tF" format new Date )
+println( "%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date )
+println( new Date )
+println( (new Date).getClass )
+println( (new Date).toString )
+println( (new Date).toString.getClass )
+*/
+
+/*
 // 今日を取得 YYYY/MM/DD HH24:MI:SS
 import java.text.SimpleDateFormat
 import java.sql.Timestamp
 
-val now = java.util.Calendar.getInstance()
-println( now.get(java.util.Calendar.YEAR) )
-println(System.currentTimeMillis())
+//val now = java.util.Calendar.getInstance()
+//println( now.get(java.util.Calendar.YEAR) )
+//println(System.currentTimeMillis())
 
 val date = "2014/12/25 17:37:30"
 val df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 df.setLenient(false)
-println(df.parse(date))
-val itnow = new Timestamp(System.currentTimeMillis())
-println( itnow.getTime() )
-// println( Timestamp.valueOf(itnow) )
+println(df.parse(date).getClass)
+
+val tsnow = new Timestamp(System.currentTimeMillis())
+println(System.currentTimeMillis().getClass)
+println( tsnow.getTime().getClass )
+println( tsnow.getClass )
+
+val tsvof = "2014-12-25 17:37:30.12345678"
+println( Timestamp.valueOf(tsvof) )
 
 val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-println(sdf.format( itnow ))
-println(df.format( itnow ))
-println(Timestamp.valueOf( itnow.toString ))
+println(sdf.format( tsnow ).getClass)
+println(df.format( tsnow ).getClass)
+println(df.format( System.currentTimeMillis() ).getClass)
+println(df.format( new Timestamp(System.currentTimeMillis()) ).getClass)
+println( tsnow.getClass )
+println( tsnow.toString.getClass )
+println(Timestamp.valueOf( tsnow.toString ).getClass)
+println(Timestamp.valueOf( sdf.format(tsnow) ).getClass)
+*/
+
+
 
 /*
 // foreach
