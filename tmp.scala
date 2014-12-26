@@ -6,6 +6,67 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// for ←
+val listItems = List("Scala","Java","Ruby")
+ 
+for(item <- listItems) println("item = " + item)
+for(item ← listItems) println("item = " + item)
+
+
+/*
+// if は最後に評価された値を返却する
+val x = 0
+val res = if(x == 0) "zerooo" else "not"
+
+println(res)
+
+val y = 1
+//val els = if(y == 0) "zerooo" else "not"
+val els = if(y == 0) "zerooo"
+
+println(els)
+*/
+
+
+/*
+// タプル配列
+def rettup = {
+  ( ("fdd"->"sdfd"),
+    ("key"->"koma") )
+}
+
+println( rettup._1 )
+*/
+
+
+
+/*
+// タプルを返却
+def rettup = {
+  ("fdd","sdfd")
+}
+
+println( rettup._2 )
+*/
+
+
+
+/*
+// タプル 22個まで指定できる
+println( ("asno") )
+println( ("asno").getClass )
+println( ("asno",8) )
+println( ("asno",8).getClass )
+println( ("asno","asdfd",1) )
+println( ("asno","asdf",1).getClass )
+println( ("asno","asdf",1)._1 )
+println( ("asno"->"asdfd",1) )
+println( ("asno"->"asdfd",1).getClass )
+println( ("asno"->"asdfd",1)._1.getClass )
+*/
+
+
+
 /*
 // immutable追加 Map
 val map1 = Map("kkkk" -> "vvv","kkkk2" -> "vvv2")
