@@ -6,11 +6,48 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+/*
+// yield
+val listItems = List("Scala","Java","Ruby")
+
+val resList = for(item <- listItems) yield "bon" + item
+println(resList)
+
+println(for(item <- listItems) yield "ben" + item)
+
+for(item <- listItems) yield {println("bun" + item)}
+
+val bin = for(item <- listItems) yield {
+  "bin" + item
+  "nasi"
+}
+println(bin)
+*/
+
+
+/*
+// for フィルタリング
+val listItems = List("Scala","Java","Ruby")
+
+for (
+item <- listItems // ジェネレータ
+if item.length == 4 // フィルタ
+) {
+  println(item)
+  println(item)
+}
+*/
+
+
+/*
 // for ←
 val listItems = List("Scala","Java","Ruby")
  
 for(item <- listItems) println("item = " + item)
 for(item ← listItems) println("item = " + item)
+*/
+
 
 
 /*
