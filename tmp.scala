@@ -8,6 +8,28 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// デフォルト引数
+def defau(aaa: String = "nanigasi") {
+  println(aaa)
+}
+
+defau()
+defau("renren")
+
+def niban(aaa: String = "nibanme", bbb: String = "hutatume") {
+  println(aaa)
+  println(bbb)
+}
+
+niban()
+niban("bonbon")
+niban("denden","daiko")
+niban(bbb = "daiko")
+
+*/
+
+
+/*
 // yield
 val listItems = List("Scala","Java","Ruby")
 
