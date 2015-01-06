@@ -6,6 +6,11 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// ファイル一覧
+import java.io.File
+
+val dir = new File(".")
+
 
 
 /*
