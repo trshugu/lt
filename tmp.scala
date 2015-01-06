@@ -7,6 +7,51 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+/*
+// sqlファイル読み込み
+import java.io.File
+import scala.io.Source
+
+val r = new File("sql.sql")
+println(r)
+val s = Source.fromFile(r)
+s.getLines.foreach(println)
+
+//ワンライナー
+Source.fromFile(new File("sql.sql")).getLines.foreach(println)
+*/
+
+/*
+// longに変換
+println("2")
+println("2".getClass)
+println("2".toInt)
+println("2".toInt.getClass)
+println("2".toLong)
+println("2".toLong.getClass)
+*/
+
+/*
+// 配列をseqに格納
+val str = "123,1232,3222"
+val arr = str split ','
+println(arr)
+arr.foreach{i=>
+  println(i)
+}
+
+val l = arr.map{i=>
+  i
+}
+
+l.map{i=>println(i)}
+println(l)
+
+// println(Seq(123,32,12))
+*/
+
+
 /*
 // デフォルト引数
 def defau(aaa: String = "nanigasi") {
