@@ -249,6 +249,20 @@ println(scala.collection.concurrent.TrieMap)
 
 
 /*
+// 文字列-> timestamp
+import java.text.SimpleDateFormat
+import java.sql.Timestamp
+
+val df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+df.setLenient(false)
+val date = "2014/12/25 17:37:30"
+println( df.parse(date).getTime() )
+println( df.parse(date).getTime().getClass )
+println( new Timestamp(df.parse(date).getTime()) )
+*/
+
+
+/*
 // 文字列->日付
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -257,7 +271,9 @@ val df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 df.setLenient(false)
 val date = "2014/12/25 17:37:30"
 println(df.parse(date))
+println(df.parse(date).getClass)
 println( "%tY/%<tm/%<td %<tH:%<tM:%<tS" format df.parse(date) )
+println( ("%tY/%<tm/%<td %<tH:%<tM:%<tS" format df.parse(date)).getClass )
 */
 
 
