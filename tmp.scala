@@ -6,6 +6,39 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// どちらのモジュールを使うか外部の設定で分岐させる
+
+/*
+*/
+// xml シリアライズデシリアライズ
+abstract class Item {
+  val name: String
+  val age: Int
+  val isTarget: Boolean
+  def toXML = <item isTarget={isTarget.toString} ><name>{name}</name><age>{age}</age></item>
+}
+
+// シリアライズ
+val item = new Item { 
+  val name = "foo" 
+  val age = 19 
+  val isTarget = false 
+}
+
+val xml = item.toXML // <item isTarget="false"><name>foo</name><age>19</age></item>
+
+
+object Item {
+  def fromXML(node: scala.xml.Node): Item = new Item {
+    val name = (node \ "name").text
+    val age = (node \ "age").text.toInt
+    val isTarget = (node \ "@isTarget").text.toBoolean
+  }
+}
+
+// デシリアライズ
+val item = Item.fromXML(<item isTarget="false"><name>foo</name><age>19</age></item>)
+
 /*
 // enumurationの利用
 object WeekDay extends Enumeration {
