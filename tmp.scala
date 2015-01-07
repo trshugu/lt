@@ -8,6 +8,10 @@ object tmp { def main(args: Array[String]): Unit = {
 
 // どちらのモジュールを使うか外部の設定で分岐させる
 
+
+// xml シリアライズデシリアライズ2 case objectでもいけるっぽい
+
+
 /*
 */
 // xml シリアライズデシリアライズ
@@ -26,7 +30,7 @@ val item = new Item {
 }
 
 val xml = item.toXML // <item isTarget="false"><name>foo</name><age>19</age></item>
-
+println(xml)
 
 object Item {
   def fromXML(node: scala.xml.Node): Item = new Item {
@@ -37,7 +41,12 @@ object Item {
 }
 
 // デシリアライズ
-val item = Item.fromXML(<item isTarget="false"><name>foo</name><age>19</age></item>)
+val item2 = Item.fromXML(<item isTarget="false"><name>foo</name><age>19</age></item>)
+println(item2)
+println(item2.name)
+println(item2.age)
+println(item2.isTarget)
+
 
 /*
 // enumurationの利用
