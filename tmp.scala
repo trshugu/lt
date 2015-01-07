@@ -7,6 +7,21 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// enumurationの利用
+object WeekDay extends Enumeration {
+  type WeekDay = Value
+  val Mon, Tue, Wed, Thu, Fri, Sat, Sun = Value
+}
+import WeekDay._
+
+def isWorkingDay(d: WeekDay) = ! (d == Sat || d == Sun)
+
+println(isWorkingDay(Mon))
+println(isWorkingDay(Sat))
+// println(isWorkingDay(Death))
+*/
+
+/*
 // ファイル一覧
 import java.io.File
 
