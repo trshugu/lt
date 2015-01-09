@@ -6,19 +6,146 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
-// どちらのモジュールを使うか外部の設定で分岐させる
 
-
-// xml シリアライズデシリアライズ2 case objectでもいけるっぽい
 
 
 /*
+// Symbol
+println('aoija)
+println('aoija.getClass)
 */
+
+
+
+/*
+// どちらのモジュールを使うか外部の設定で分岐させる
+import java.io.File
+import scala.io.Source
+
+// val l = Source.fromFile(new File("config.txt")).getLines.toArray
+// println( l(0) )
+
+val a = try {Source.fromFile(new File("config.txt")).getLines.toArray.apply(0) } catch { case e:Exception => None }
+println( a )
+
+val res = a match {
+  case "hell" => "jigoku"
+  case "death" => "siiii"
+  case _  => "nothing"
+}
+
+println(res)
+*/
+
+
+
+/*
+case object Ccc {
+  val aa = 1
+  val bb = 2
+}
+
+object Ooo {
+  val aa = 3
+  val bb = 4
+}
+
+// toStringが実装されている
+println(Ccc)
+println(Ooo)
+
+println(Ccc.aa)
+println(Ooo.aa)
+*/
+
+/*
+// case abstract いろいろなメソッドを追加してくれる
+abstract case class acc()
+
+case class Bom(id:String,code:Int)
+class Dom(id:String,code:Int)
+
+
+val bom = new Bom("bbbb",0)
+val dom = new Dom("ddd",3)
+
+// コンストラクタとフィールドが定義される
+println(bom.id) // 実はメソッド呼び出し
+// println(dom.id)
+
+// toStringも自動で実装
+println(bom)
+println(bom.code.getClass)
+
+// copy(一部を変えたインスタンスの作成)
+val bomnext = bom.copy(code = 2)
+println(bomnext)
+
+
+// applyによりnewがいらない
+val bom2 = Bom("bbbb2",0)
+// val dom2 = Dom("ddd",3)
+
+println(bom2.id)
+//  println(dom2.id)
+
+// パターンマッチ(unapplyが定義されている)
+val lBom = List(Bom("asadf",34),Bom("fdsf",432),Bom("fefefz",2134))
+val list = lBom collect {case Bom(n, 34)=>n}
+println(list)
+*/
+
+
+/*
+// xml シリアライズデシリアライズ2 case objectでもいけるっぽい
+abstract class Item {
+  val name: String
+  val age: Int
+  val isTarget: Boolean
+  
+  def toXML = <item isTarget={isTarget.toString} ><name>{name}</name><age>{age}</age></item>
+}
+
+// シリアライズ
+val item = new Item { 
+  val name = "foo" 
+  val age = 19 
+  val isTarget = false 
+}
+
+val xml = item.toXML // <item isTarget="false"><name>foo</name><age>19</age></item>
+println(xml)
+
+case object Item {
+  def fromXML(node: scala.xml.Node): Item = new Item
+  {
+    val name = (node \ "name").text
+    val age = (node \ "age").text.toInt
+    val isTarget = (node \ "@isTarget").text.toBoolean
+  }
+}
+
+// デシリアライズ
+val item2 = Item.fromXML(<item isTarget="false"><name>foo</name><age>19</age></item>)
+println(item2.toXML)
+println(item2.name)
+println(item2.age)
+println(item2.isTarget)
+
+val item3 = Item.fromXML(xml)
+println(item3.toXML)
+*/
+
+
+
+
+/*
 // xml シリアライズデシリアライズ
 abstract class Item {
   val name: String
   val age: Int
   val isTarget: Boolean
+  
   def toXML = <item isTarget={isTarget.toString} ><name>{name}</name><age>{age}</age></item>
 }
 
@@ -33,7 +160,8 @@ val xml = item.toXML // <item isTarget="false"><name>foo</name><age>19</age></it
 println(xml)
 
 object Item {
-  def fromXML(node: scala.xml.Node): Item = new Item {
+  def fromXML(node: scala.xml.Node): Item = new Item
+  {
     val name = (node \ "name").text
     val age = (node \ "age").text.toInt
     val isTarget = (node \ "@isTarget").text.toBoolean
@@ -42,11 +170,71 @@ object Item {
 
 // デシリアライズ
 val item2 = Item.fromXML(<item isTarget="false"><name>foo</name><age>19</age></item>)
-println(item2)
+println(item2.toXML)
 println(item2.name)
 println(item2.age)
 println(item2.isTarget)
 
+val item3 = Item.fromXML(xml)
+println(item3.toXML)
+*/
+
+/*
+// xmlのパターンマッチ
+val item = <item isTarget="false" ><name>foo</name><age>19</age></item>
+item match {
+  case <item><name>{name}</name><age>{age}</age></item> => println(name) // foo
+  case _ =>
+}
+
+item match {
+  case <item><name>{name}</name>{unused @ _*}</item> => println(name) // foo
+  case _ =>
+}
+
+item match {
+  case <item>{elements @ _*}</item> => {
+    elements foreach {
+      el => println(el.text) // "foo" "19"
+    }
+  }
+  case _ =>
+}
+
+val items =
+<items>
+  <item isTarget="false" ><name>foo</name><age>19</age></item>
+  <item isTarget="true" ><name>bar</name><age>24</age></item>
+</items>
+
+for ( <item>{elements @ _*}</item> <- items \ "item" ) {
+  elements foreach {
+    el => println(el.text) // "foo" "19" "bar" "24"
+  }
+}
+*/
+
+
+
+/*
+// xmlファイル出力
+import scala.xml.XML
+val xml = 
+<root>
+  <items>
+    <item isTarget="false" ><name>foo</name><age>19</age></item>
+    <item isTarget="true" ><name>bar</name><age>24</age></item>
+  </items>
+</root>
+XML.save("items.xml", xml, "UTF-8", true, null)
+*/
+
+
+/*
+// xmlロード
+import scala.xml.XML
+println(XML.loadFile("items.xml"))
+*/
 
 /*
 // enumurationの利用
