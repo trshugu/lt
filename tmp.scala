@@ -7,7 +7,99 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// idの配列それぞれに情報を紐づける3
+case class res(
+  id: Long,
+  str: String
+)
 
+val lres = Seq(res(30215809L, "dondon"),res(60230461L, "nini"))
+val params = Seq(30215809L, 30216321L, 60230461L, 30216321L)
+
+val tuita = params.map {i =>
+  lres.find(_.id == i) match {
+    case Some(v) => i + v.str
+    case None => "nai"
+  }
+}
+
+println(tuita)
+*/
+
+
+/*
+// 発見したら終了
+val cf = List(1,2,3).collectFirst{
+  case 2 =>
+    println("aa")
+    "two" 
+  case _ =>
+    println("nisni")
+    "nai"
+
+}
+println(cf)
+*/
+
+
+/*
+// idの配列それぞれに情報を紐づける2 NG
+case class res(
+  id: Long,
+  str: String
+)
+
+val lres = Seq(res(30215809L, "dondon"),res(60230461L, "nini"))
+//println(lres)
+//lres.map{i=>println(i.id)}
+//lres.foreach{i=>println(i)}
+val params = Seq(30215809L, 30216321L, 60230461L, 30216321L)
+
+val tuita = params.map {i =>
+  lres.map{j=>
+    j.id match {
+      case i => Map(i-> "atta")
+      case _ => "nochint"
+    }
+  }
+}
+
+println(tuita)
+
+lres.map{i=>
+  i.id match {
+    case 30215809L => println(i + "aaa")
+    case _ => println(i)
+  }
+}
+*/
+
+
+
+/*
+// idの配列それぞれに情報を紐づける
+val params = Seq(30215809L, 30216321L, 60230461L, 30216321L)
+val info = Map(30216321L -> "porepre")
+//println( info.get(30216321L) )
+//println( info.get(30216321L).mkString )
+//println( info.get(30216300L) )
+//println( info.contains(30216321L) )
+//println( info.contains(30216300L) )
+
+val tuita = params.map {i =>
+  if(info.contains(i))
+  {
+    Map(i -> info.get(30216321L).mkString)
+  }
+  else
+  {
+    "nothing"
+  }
+}
+
+println(tuita)
+*/
 
 /*
 // Symbol
