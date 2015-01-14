@@ -7,6 +7,95 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
+
+
+/*
+val m = Map("kkk"->"vvv")
+println(m)
+println(m.get("kkk").mkString)
+*/
+
+
+/*
+// MD5 scala的に
+import java.security.MessageDigest
+import java.text.MessageFormat
+import java.net.URLEncoder
+
+def createHash(src:String) ={
+  val md = MessageDigest.getInstance("SHA-256")
+  val hashBytes = md.digest( src.getBytes("UTF-8") )
+  
+  // ハッシュ値を16進文字列に変換
+  var str = new StringBuilder("");
+  for (hashByte <- hashBytes)
+  {
+    str.append(Integer.toHexString(0xFF & hashByte).toUpperCase());
+  }
+  
+  str
+}
+
+def createHash2(src:String) ={
+  val md = MessageDigest.getInstance("SHA-256")
+  val hashBytes = md.digest( src.getBytes("UTF-8") )
+  
+  // ハッシュ値を16進文字列に変換
+  var str = new StringBuilder("");
+  for (hashByte <- hashBytes)
+  {
+    str.append(Integer.toHexString(0xFF & hashByte).toUpperCase());
+  }
+  
+  
+  val h = hashBytes.map{b=>Integer.toHexString(0xFF & b).toUpperCase()}.mkString
+  println(h)
+  println(h.getClass)
+
+  val j = hashBytes.map{b=>Integer.toHexString(0xFF & b).toUpperCase()}.mkString.substring(5,10)
+  println(j)
+  println(j.getClass)
+  
+  str.substring(5, 5 + 5)
+}
+
+def createHash3(src:String) ={
+  MessageDigest.getInstance("SHA-256").digest( src.getBytes("UTF-8") ).map{b=>Integer.toHexString(0xFF & b).toUpperCase()}.mkString.substring(5,10)
+}
+
+println(createHash("hash"))
+println(createHash2("hash"))
+println(createHash3("hash"))
+println(MessageDigest.getInstance("SHA-256").digest( "hash".getBytes("UTF-8") ).map{b=>Integer.toHexString(0xFF & b).toUpperCase()}.mkString.substring(5,10))
+*/
+
+/*
+// MD5
+import java.security.MessageDigest
+import java.text.MessageFormat
+import java.net.URLEncoder
+
+def createHash(src:String) ={
+  //md5 =  require("crypto").createHash 'SHA256'
+  //md5.update src, 'utf8'
+  //md5.digest('hex').substr(5,5).toUpperCase()
+  val md = MessageDigest.getInstance("SHA-256")
+  val hashBytes = md.digest( src.getBytes("UTF-8") )
+  
+  // ハッシュ値を16進文字列に変換
+  var str = new StringBuilder("");
+  for (hashByte <- hashBytes)
+  {
+    str.append(Integer.toHexString(0xFF & hashByte).toUpperCase());
+  }
+  
+  str.substring(5, 5 + 5);
+}
+*/
+
+
 /*
 // idの配列それぞれに情報を紐づける3
 case class res(
