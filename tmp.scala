@@ -9,6 +9,32 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// ガードによるチェック
+List(1,2,3).map{
+  case 1 => println("one")
+  case n => println(n)
+}
+*/
+
+/*
+// 日付チェック
+import java.text.SimpleDateFormat
+
+val df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+df.setLenient(false)
+
+println(df.parse("2014/12/12 12:12:12"))
+try{
+  println(df.parse("23098"))
+}
+catch { case e:Exception => None }
+{
+  println("ng")
+}
+*/
+
+/*
 // 数値チェック
 println("109")
 println("109".matches("""^\d+$"""))
@@ -16,7 +42,7 @@ println("d109")
 println("d109".matches("""^\d+$"""))
 println("1０9")
 println("1０9".matches("""^\d+$"""))
-
+*/
 
 /*
 val m = Map("kkk"->"vvv")
