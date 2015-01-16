@@ -9,6 +9,11 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// 数値チェック
+println("109")
+println("109".matches("""^\d+$"""))
+val reg = "^\d+$".r
+println("109".matches(reg))
 
 
 /*
@@ -1161,7 +1166,7 @@ import scala.xml.XML
 val ls = XML.loadString("<parent><child>a</child><child>b</child></parent>")
 
 import java.net.URL
-val l = XML.load(new URL("http://bap.dev-cloud.rekochoku.com/bcapi/getTrackInfo/?track_id=30215809,60230461,30216321,30216321"))
+val l = XML.load(new URL(""))
 
 println("death")
 println(ls.getClass)
