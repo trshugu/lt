@@ -12,8 +12,10 @@ object tmp { def main(args: Array[String]): Unit = {
 // 数値チェック
 println("109")
 println("109".matches("""^\d+$"""))
-val reg = "^\d+$".r
-println("109".matches(reg))
+println("d109")
+println("d109".matches("""^\d+$"""))
+println("1０9")
+println("1０9".matches("""^\d+$"""))
 
 
 /*
