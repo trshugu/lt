@@ -5,6 +5,11 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+// 部分関数
+val pf: PartialFunction[Int, String] = {
+  case i if i%2 == 0 => "even"
+}
+
 
 /*
 // xml シリアライズデシリアライズ3
