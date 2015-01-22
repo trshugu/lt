@@ -5,11 +5,22 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
+
+/*
 // 部分関数
 val pf: PartialFunction[Int, String] = {
   case i if i%2 == 0 => "even"
 }
 
+val tf: (Int => String) = pf orElse { case _ => "odd"}
+
+
+println( pf(2) )
+println( tf(2) )
+println( tf(3) )
+*/
 
 /*
 // xml シリアライズデシリアライズ3
