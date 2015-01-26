@@ -6,6 +6,29 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+/*
+// either型
+def parseInt(s:String) : Either[Exception, Int] = {
+  // 文字列がIntに変換できるならIntを、失敗した場合はExceptionを返す関数
+  try Right(s.toInt) catch { case e:Exception => Left(e) } 
+}
+
+// rightを返す
+println(parseInt("128"))
+// leftを返す
+println(parseInt("124A"))
+
+// floatに変換
+println( parseInt("49").right map { _.toFloat } )
+// floatは実行されない
+println( parseInt("ADF").right map { _.toFloat } )
+
+// LeftをgetMessage
+println( parseInt("ADF").left map { _.getMessage }  )
+// getMessageは実行されない
+println( parseInt("40").left map { _.getMessage } )
+*/
+
 
 
 /*
