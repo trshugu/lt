@@ -6,6 +6,17 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+
+/*
+// split
+val res = "sdfl,kjhs,dkjf,hsalfd".split(',')
+val kara = "".split(',')
+
+println(res)
+println(kara)
+*/
+
 /*
 // either型
 def parseInt(s:String) : Either[Exception, Int] = {
