@@ -9,6 +9,359 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// headOption
+println("proe".headOption)
+println("".headOption)
+*/
+
+/*
+// toRight OptionがSome(x)の場合はRight(x)に、Noneの場合、Left(left)に
+println( Some(3).toRight("nai") )
+println( None.toRight("nai") )
+
+println( Some(3).toLeft("nai") )
+println( None.toLeft("nai") )
+*/
+
+/*  
+println(
+  for {
+    a <- Some(1).toRight(new Exception("None")).right
+    b <- Right(3).right
+  } yield a
+)
+*/
+
+
+/*
+// Either基本
+def souda(x:Int):Either[Int,String] = {
+  if (x%2==0)
+  { Right("nasitoge") }
+  else
+  { Left(x) }
+}
+
+println(souda(1).left.get)
+val l = souda(2)
+println(l.right.get)
+
+Seq(1,2,4,21,3,5,7,34,12,54).foreach{x=>souda(x) match {
+    case Left(a) => println("L" + a)
+    case Right(b) => println("R" + b)
+  }
+}
+*/
+
+
+/*
+println(
+  for {
+    a <- Some(1)
+    b <- Left(2).left.toOption
+  } yield a
+)
+
+println(
+  for {
+    a <- Some(1).toRight(new Exception("None")).right
+    b <- Right(2).right
+  } yield a
+)
+
+println(
+  for {
+    a <- None.toRight(new Exception("None")).right
+    b <- Right(2).right
+  } yield a
+)
+*/
+
+/*
+// for ifを使った場合のfilter変換
+println(
+  for{
+    a <- List(Some(1), None)
+    if a.isDefined
+  }yield a.get
+)
+
+println(
+  List(Some(1), scala.None).withFilter(_.isDefined).map(a => a.get)
+)
+*/
+
+/*
+// for パターンマッチ
+println(
+  for{
+    Some(a) <- List(Some(1), None)
+  } yield a
+)
+
+println(
+  List(Some(1), None).withFilter{
+    case Some(a) => true
+    case _ => false
+  }.map{
+    case Some(a) => a
+    case _ =>
+  }
+)
+
+println(
+  List(Some(1), None).filter{n=>n!=None}.map(x=>x.get)
+)
+
+println(
+  List(Some(1), None).withFilter{case n => n!=None}.map(x=>x.get)
+)
+*/
+
+/*
+// filterとwithFilterは実行順序が違う
+val l = List(1,2,3,4)
+
+// 中間状態のListが生成されない(なので高速)
+l.withFilter( i => {
+  println("fitler " + i)
+  i % 2 == 0
+}).map( i => {
+  println("map " + i)
+  i * 2
+})
+
+// 中間状態のListが生成される
+l.filter( i => {
+  println("fitler " + i)
+  i % 2 == 0
+}).map( i => {
+  println("map " + i)
+  i * 2
+})
+*/
+
+
+
+/*
+// withFilterは高速らしい
+println(List(1,2,3,4,5).filter(n => n%2==1))
+println(List(1,2,3,4,5).withFilter(n => n%2==1).map(identity))
+*/
+
+
+/*
+// 式展開(s補完子ではStringBuilderが使われている)
+val user = "giri"
+val i = 2
+println(s"No.${i + 1} is ${user}")
+*/
+
+/*
+// 添え字
+Seq("ffdsfd","zxcxcz","wee").zipWithIndex.foreach {case  (a,i)=>
+  println(a +"asf"+ i)
+}
+*/
+
+
+
+/*
+// 内包表記
+for {i <- 1 to 3
+     j <- 1 to 3}
+    println(i * j)
+
+
+(1 to 3).foreach {
+  case i => (1 to 3).foreach {
+    case j => println(i * j)
+  }
+}
+
+(1 to 3).foreach { i => 
+  (1 to 3).foreach { j =>
+    println(i * j)
+  }
+}
+*/
+
+
+/*
+// ピリオドを省略するとwarningがでる
+Seq(1, 2, 3).reverse
+*/
+
+
+/*
+// 二重ループ
+for (i <- 1 to 2;j <- 1 to 3) printf("%d-%d%n", i, j)
+
+// セミコロン省略不可
+for (i <- 1 to 2;
+  j <- 1 to 3) printf("%d-%d%n", i, j)
+
+// 波括弧にすると省略できる
+for {i <- 1 to 2
+  j <- 1 to 3} printf("%d-%d%n", i, j)
+
+*/
+
+
+
+
+
+/*
+// 値を返却する yield
+val res = for(i<-1 to 10) yield {i + 2}
+println(res)
+
+(for(i<-1 to 10) yield {i + 2}) map {println}
+*/
+
+/*
+// forのフィルター(if)
+for( i <- 1 to 10 if i % 2 == 0 ) println(i)
+
+// and条件
+for( i <- 1 to 10 if i % 2 == 0 ; if i % 3 == 0 ) println(i)
+
+// 複数行の場合セミコロン不要
+for( i <- 1 to 10
+  if i % 2 == 0
+  if i % 3 == 0 )
+   println(i)
+*/
+
+
+
+/*
+// 恒等関数
+println( Seq(Seq(1,2,3), Seq(4), Seq(5, 6)).flatMap(identity) )
+*/
+
+/*
+// Option型で処理を続けることができる
+Seq(1,2,3,4) flatMap { x => 
+  if(x % 2 == 0) Some(x) else None 
+} map { x =>
+  x * 2
+} foreach { 
+  println 
+}
+
+for {
+  x <- Seq(1, 2, 3, 4) if x % 2 == 0
+  y = x * 2
+} println(y)
+*/
+
+
+
+
+/*
+// flatten
+println( Seq(Seq(1,2,3), Seq(4), Seq(5, 6)) flatMap { x => x } )
+println( Seq(Seq(1,2,3), Seq(), Seq(5, 6)) flatMap { x => x } )
+println( Seq(Seq(1,2,3), Seq(), Seq(5, 6)) flatten )
+println( Seq(Seq(1,2,3), Seq(), Seq(5,6)) flatMap { x => 10 +: x } )
+
+println( Seq(Seq(1,2,3), Seq(), Seq(5,6)) flatMap { x => Seq(x.size) } )
+println( Seq(Seq(1,2,3), Seq(), Seq(5,6)) map { x => x.size } )
+
+println( Seq(Seq("hello", "world"), Seq("good", "morning")) flatMap { x => Seq(x.mkString(" ").toUpperCase) } )
+*/
+
+/*
+// 拡張メソッド
+class UnitWrapper(i: Int) {
+  def asFt = {
+    i * 3.2808
+  }
+
+  def asM = {
+    i * 0.30480
+  }
+  
+  def plus(x:Int) ={ x + x }
+  def +(x:Int) ={ x + x }
+}
+
+implicit def unitWrapper(i:Int) = new UnitWrapper(i)
+
+println("1 foot = " + 1.asM + " meters");
+println("1 meter = " + 1.asFt + "foot")
+
+println( 1 plus 3 )
+println( 1 + 3 )
+*/
+
+
+
+/*
+// 逆順
+println(9 to 0)
+for (i <- 9 to 0 by -1) {
+  println(i)
+}
+
+for(_ <- 1 to 3) println("zzz")
+// for (val i <- 1 to 10) println(i)
+*/
+
+
+/*
+// 繰り返し
+for (i <- 1 to 10) println(i)
+for (i <- Range(1,11)) println(i)
+for (i <- Range(1,2,11)) println(i)
+// for (i <- Range(1,2,10,11)) println(i)
+// for (i <- Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) println(i)
+println(Range(2,5))
+
+
+for (i <- 1 until 10) println(i)
+
+println(1 to 10)
+println(1 until 10)
+*/
+
+/*
+// for構文 パターンマッチ
+val list = List(1->"o", 2->"t", 3->"t", 4->"f", 5->"f")
+
+for ((n, "t") <- list) println(n)
+for (t @ (_, "f") <- list) println(t)
+*/
+
+
+/*
+// for構文 kvp
+val map = Map(1 -> "one", 2 -> "two", 3 -> "three")
+
+for ((k,v) <- map) printf("%d = %s%n", k, v)
+for (t <- map) println(t.getClass)
+for (t <- map) println(t._1 + " = " + t._2)
+*/
+
+/*
+// for構文 tupleリスト
+for ( (a,b) <- List((1,"one"),(2,"two"),(3,"three")) ){
+  printf("%d = %s%n", a, b)
+}
+*/
+
+/*
+// for (変数 <- コレクション) 式
+for (x <- Seq(1,3,4)) println(x)
+for (x <- List(1,3,4)) println(x)
+
+// for (変数 <- コレクション) { 式;… }
+for (x <- Seq(1,3,4)){println(x)}
+for (x <- List(1,3,4)){println(x)}
+*/
+
+/*
 // split
 val res = "sdfl,kjhs,dkjf,hsalfd".split(',')
 val kara = "".split(',')
