@@ -9,6 +9,110 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// for の中でのif
+println(
+  for {
+    b <- Seq(1,2,5,8,6,2134,3,4,7,9,21)
+    if(b % 2 == 0) 
+    c = b + 1
+  } yield c
+)
+*/
+
+
+
+/*
+// Eitherとprojectionによるモナド
+import scala.util.Random
+
+def rndopt(deku:Option[String]):Option[String] = {
+  return if(Random.nextBoolean) Some("some") else None
+}
+
+// rightの場合は処理継続。leftになったら返却される
+println(
+  rndopt(None).toRight("death").right.map{
+    case "some"=> "righttt"
+    case _ =>"deden"
+  }
+)
+
+println(
+  rndopt(None).toRight("death")
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+    .right.map{x=>rndopt(None).toRight("death")}
+)
+
+println(
+  for {
+    a <- Seq(1,3,2,6)
+    b = a + 1
+  } yield b
+)
+
+println(
+  for {
+    a <- Right(1).right
+    b = a + 1
+  } yield b
+)
+
+println(
+  (for {
+    a <- rndopt(Some("mone")).toRight("death").right
+    b <- rndopt(Some(a)).toRight("deach2").right
+  } yield b) match {
+    case Left(x) => "left"
+    case Right(x) => "right"
+  }
+)
+*/
+
+
+
+/*
+// right left
+import scala.util.Random
+
+def rndopt:Option[String] = {
+  return if(Random.nextBoolean) Some("some") else None
+}
+
+def retopt(str:String):Option[String] = {
+  if(str == "some") return Some(str)
+  return None
+}
+
+def retnone:Option[Any] = { return None }
+
+
+println(
+  retopt("some") match {
+    case Some(s) => "sss"
+    case None => "nnn"
+  }
+)
+
+println(
+  retopt("soe").toRight("nothing") match{
+    case Right(x) => x + " rrr"
+    case Left(x) => x + " lll"
+  }
+)
+
+println( None.toRight("ss").right.map{identity} )
+
+println(rndopt)
+*/
+
+
+/*
 // headOption
 println("proe".headOption)
 println("".headOption)
