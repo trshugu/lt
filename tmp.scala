@@ -9,6 +9,59 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// convertをMapへ
+def moto = Map(
+  0->"RRR",
+  5->"VVV"
+)
+
+def con(t:Int) = {
+  moto.keys.find(n=>n==t).getOrElse("")
+  
+}
+
+def conver(t:Int) = t match {
+  case 0 => moto.get(t).get
+  case 5 => moto.get(t).get
+  case _  => ""
+}
+
+def check(c:String) = {
+  moto.values.find(n=>n==c)
+}
+
+println( conver(0) )
+println( conver(1) )
+println( conver(5) )
+println( conver(10) )
+
+println( check("RRR") )
+println( check("AAA") )
+println( check("VVV") )
+
+println( con(1) )
+println( con(0) )
+println( con(33) )
+println( con(5) )
+*/
+
+/*
+// enumをkvpで実現
+val ek = Map(
+  2->"SIN",
+  3->"VID"
+)
+
+// あるとき
+println(ek.values.find(n=>n=="SIN"))
+
+// ないとき
+println(ek.values.find(n=>n=="VON"))
+*/
+
+
+
+/*
 // for の中でのif
 println(
   for {
