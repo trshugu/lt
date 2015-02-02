@@ -9,6 +9,163 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+def map = Map(
+  0 -> "RE",
+  9 -> "A"
+)
+
+println( map.values.find(n=>n=="RE") match{
+  case Some(x)=>x
+  case None => None
+} )
+
+println(map.get(3))
+
+val res = for(
+  (a,b) <- map
+  if (b == "REA")
+) yield (a,b)
+
+println (res)
+println (res.keys)
+
+val src = "RE,mo".split(',')
+//println(src)
+//src.foreach(println)
+
+val vaaa = for{
+  i <- src
+  (k,v) <- map
+  if (v == i)
+} yield k
+
+println(vaaa)
+*/
+
+
+
+/*
+// 並列リストの時間計測
+val sstart = System.currentTimeMillis();
+val s = (1 to 2147483647).aggregate(BigDecimal(0))( (d, n) => d - n,(d1, d2) => d1 + d2)
+val send = System.currentTimeMillis();
+println(s)
+println(send-sstart);
+
+val pstart = System.currentTimeMillis();
+val p = (1 to 2147483647).par.aggregate(BigDecimal(0))( (d, n) => d - n,(d1, d2) => d1 + d2)
+val pend = System.currentTimeMillis();
+println(p)
+println(pend-pstart);
+*/
+
+
+
+/*
+// リストの出現数算出
+val gosanke = List("Goro", "Hideki", "Hiromi", "Hideki", "Goro", "Hideki")
+val countByGosanke = (Map.empty[String, Int] /: gosanke) { (r, e) =>
+  r + (e -> (r.getOrElse(e, 0) + 1))
+} 
+
+println(countByGosanke)
+println(Map("as"->2) + ("as"->3))
+*/
+
+
+/*
+// 並列確認
+(1 to 10).fold(0){case (a,b) => println(a + " " + b);a-b}
+(1 to 10).par.fold(0){case (a,b) => println(a + " " + b);a-b}
+println( (1 to 10).fold(0)((z, n) => z - n) )
+println( (1 to 10).par.fold(0)((z, n) => z - n) )
+*/
+
+
+
+/*
+// scan 直列のみ
+println( (1 to 5).scanLeft(0)((z,n) => z - n) )
+println( (1 to 5).scanRight(0)((n,z) => n - z) )
+println( (1 to 5).par.scanLeft(0)((z,n) => z - n) )
+println( (1 to 5).par.scanRight(0)((n,z) => n - z) )
+*/
+
+/*
+// reduce
+println( (1 to 100).reduce((z, n) => z - n) )
+println( (1 to 100).reduceLeft((z, n) => z - n) )
+println( (1 to 100).reduceRight((z, n) => z - n) )
+println( (1 to 100).reduceOption((z, n) => z - n) )
+println( (1 to 100).reduceLeftOption((z, n) => z - n) )
+println( (1 to 100).reduceRightOption((z, n) => z - n) )
+
+println( (1 to 100).par.reduce((z, n) => z - n) ) // 並列
+println( (1 to 100).par.reduceLeft((z, n) => z - n) )
+println( (1 to 100).par.reduceRight((z, n) => z - n) )
+println( (1 to 100).par.reduceOption((z, n) => z - n) ) // 並列
+println( (1 to 100).par.reduceLeftOption((z, n) => z - n) )
+println( (1 to 100).par.reduceRightOption((z, n) => z - n) )
+*/
+
+
+
+/*
+// aggregate
+println(
+  List(1,3,5,7).aggregate(BigDecimal(0))(
+    (d, n) => d - n,
+    (d1, d2) => d1 * d2 // 直列の場合使われない
+  )
+)
+
+println(
+  List(1,3,5,7).par.aggregate(BigDecimal(0))(
+    (d, n) => d - n,
+    (d1, d2) => d1 + d2
+  )
+)
+
+println( (1 to 100).aggregate(BigDecimal(0))((d, n) => d - n,(d1, d2) => d1 + d2) )
+println( (1 to 100).par.aggregate(BigDecimal(0))((d, n) => d - n,(d1, d2) => d1 + d2) )
+
+println( List(1,3,5,7).fold(0)((z, n) => z - n) )
+println( List(1,3,5,7).par.fold(0)((z, n) => z - n) )
+*/
+
+/*
+// 並列コレクション
+// ((0-1)-2)-3
+println( (1 to 10).fold(0)((z, n) => z - n) )
+println( (1 to 10).par.fold(0)((z, n) => z - n) )
+*/
+
+
+
+/*
+// fold
+println(
+  // ((0+1)+2)+3
+  List(1,2,3).fold(0)((z, n) => z + n)
+)
+
+println(
+  // 1+(2+(3+0))
+  List(1,2,3).foldRight(0)((n,z)=> n + z)
+)
+
+println(
+  // ((0-1)-2)-3
+  List(1,2,3).fold(0)((z, n) => z - n)
+)
+
+println(
+  // 1-(2-(3-0))
+  List(1,2,3).foldRight(0)((n,z)=> n - z)
+)
+*/
+
+/*
 // convertをMapへ
 def moto = Map(
   0->"RRR",
