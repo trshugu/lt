@@ -9,6 +9,77 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 /*
+// future3 callback
+import scala.util._
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val f: Future[String] = Future {
+  println("dfdf")
+  Thread.sleep(1000)
+  "safjd"
+}
+
+f.onSuccess { case msg: String => println(msg) }
+f.onFailure { case t: Throwable => println(t.getMessage()) }
+
+f.onComplete {
+  case Success(msg) => println(msg)
+  case Failure(t)   => println(t.getMessage())
+}
+
+Await.ready(f, Duration.Inf)
+*/
+
+
+/*
+// future2 Awaitで終了を待つ
+import scala.util._
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val f: Future[String] = Future {
+  Thread.sleep(1000)
+  "fufuf"
+}
+
+val res: String = Await.result(f, Duration.Inf)
+println(res)
+
+Await.ready(f, Duration.Inf)
+f.value.get match {
+  case Success(msg) => println(msg)
+  case Failure(ex) => println(ex.getMessage)
+}
+*/
+
+/*
+// future
+import scala.util.Try
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val f: Future[String] = Future {
+  println("dfdf")
+  Thread.sleep(1000)
+  "sdf"
+}
+
+println(f.isCompleted)
+val res:Option[Try[String]] = f.value
+println(res)
+
+Thread.sleep(2000)
+println(f.isCompleted)
+val res2:Option[Try[String]] = f.value
+println(res2.get.get)
+*/
+
+
+/*
 def map = Map(
   0 -> "RE",
   9 -> "A"
