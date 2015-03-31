@@ -8,6 +8,502 @@ object tmp { def main(args: Array[String]): Unit = {
 
 
 
+
+/*
+// stringのcase分岐
+val str = "sdflkj"
+
+
+str match {
+  case i if (i == "sdflkj") => println("succsess")
+  case _ => println("noi")
+}
+// println(str)
+
+*/
+
+/*
+// 直列と並列のリスト処理
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+import scala.util.{Failure, Success}
+import java.security.MessageDigest
+import java.text.MessageFormat
+import java.net.URLEncoder
+
+def createHash(src:String) ={
+  val md = MessageDigest.getInstance("SHA-256")
+  val hashBytes = md.digest( src.getBytes("UTF-8") )
+  
+  // ハッシュ値を16進文字列に変換
+  var str = new StringBuilder("")
+  for (hashByte <- hashBytes)
+  {
+    str.append(Integer.toHexString(0xFF & hashByte).toUpperCase())
+  }
+  
+  str
+}
+
+
+val start = System.currentTimeMillis()
+val res = (1 to 500000).map {x=>
+  createHash(scala.util.Random.alphanumeric.take(8).mkString)
+}
+val end = System.currentTimeMillis()
+println(end-start)
+
+val pstart = System.currentTimeMillis()
+val pres = (1 to 500000).par.map {x=>
+  createHash(scala.util.Random.alphanumeric.take(8).mkString)
+}
+val pend = System.currentTimeMillis()
+println(pend-pstart)
+
+
+//println(createHash("a"))
+// n個のハッシュを作成する
+//val start = System.currentTimeMillis()
+
+//val s = (1 to 2147483647).aggregate(BigDecimal(0))( (d, n) => d - n,(d1, d2) => d1 + d2)
+
+//val end = System.currentTimeMillis()
+//println(s)
+//println(end-start)
+
+*/
+
+
+
+/*
+// 並列確認2
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+import scala.util.{Failure, Success}
+
+val f1 = Future { Thread.sleep(2000) }
+val f2 = Future { Thread.sleep(1000) }
+val fs = for {
+  n1<-f1
+  n2<-f2
+} yield
+
+f1.onSuccess{case _ => println("cone")}
+f2.onSuccess{case _ => println("2one")}
+fs.onSuccess{case _ => println("all")}
+Await.result(fs, Duration.Inf)
+*/
+
+/*
+// 並列確認
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+import scala.util.{Failure, Success}
+
+val f1 = Future { 3 }
+val f2 = Future { 4 }
+
+val fs = for {
+  n1 <- f1
+  n2 <- f2
+} yield n1 + n2
+
+
+fs.onComplete {
+  case Success(msg) => println(msg)
+  case Failure(t)   => println(t.getMessage())
+}
+
+Await.result(fs, Duration.Inf)
+*/
+
+/*
+// getId
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+println("in main : " + Thread.currentThread().getId())
+
+val f1 = Future{ Thread.sleep(1000);println(s"f1 : ${Thread.currentThread().getId()}"); 1 }
+val f2 = Future{ Thread.sleep(1000);println(s"f2 : ${Thread.currentThread().getId()}"); 2 }
+
+val f = f1.flatMap { n1 =>
+  println(s"f1#flatMap : ${Thread.currentThread().getId()}");
+
+  f2.map{ n2 =>
+    println(s"f2#map : ${Thread.currentThread().getId()}");
+    n1 + n2
+  }
+}
+
+//  foreachとonSuccsessは違う
+//f.onSuccess {
+//  case result => println(s"f#onSuccess : ${Thread.currentThread().getId()}")
+//}
+//f.foreach {
+//  println(s"f#foreach : ${Thread.currentThread().getId()}")
+//  println(_)
+//}
+f.foreach { r =>
+  println(s"f#foreach : ${Thread.currentThread().getId()}")
+  println(r)
+}
+
+Await.ready(f, Duration.Inf)
+*/
+
+
+/*
+// future reduce 初期値なしのfold
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val futures: Seq[Future[Int]] = Seq(
+  Future{ Thread.sleep(3000); 1 },
+  Future{ Thread.sleep(2000); 2 },
+  Future{ Thread.sleep(1000); 3 },
+  Future{ Thread.sleep(500); 4 })
+
+val f = Future.reduce(futures){ (total, v) => total + v }
+f.onSuccess{ case result: Int => println(result) }
+
+Await.ready(f, Duration.Inf)
+*/
+
+/*
+// future fold
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val futures: Seq[Future[Int]] = Seq(
+  Future{ Thread.sleep(3000); 1 },
+  Future{ Thread.sleep(2000); 2 },
+  Future{ Thread.sleep(1000); 3 },
+  Future{ Thread.sleep(500); 4 })
+
+val f = Future.fold(futures)(10){ (total, v) => total + v }
+f.onSuccess{ case result: Int => println(result) }
+
+Await.ready(f, Duration.Inf)
+*/
+
+
+/*
+// future find 特定の条件を満たしたFutureをひとつ返す
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val futures: Seq[Future[Int]] = Seq(
+  Future{ Thread.sleep(3000); 1 },
+  Future{ Thread.sleep(2000); 2 },
+  Future{ Thread.sleep(1000); 3 },
+  Future{ Thread.sleep(500); 4 })
+
+val f = Future.find(futures){ _ % 2 == 1 }
+f.onSuccess{ case result: Option[Int] => println(result.get) }
+
+Await.ready(f, Duration.Inf)
+*/
+
+
+/*
+// 並列実行するFutureの中で最初に終わったFutureをひとつ返す。
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val futures: Seq[Future[Int]] = Seq(
+  Future{ Thread.sleep(3000); 1 },
+  Future{ Thread.sleep(2000); 2 },
+  Future{ Thread.sleep(1000); throw new Exception("error in 3") },
+  Future{ Thread.sleep(500); 4 })
+
+val f = Future.firstCompletedOf(futures)
+f.onSuccess{ case result: Int => println(result) }
+f.onFailure{ case t => println(t.getMessage()) }
+
+Await.ready(f, Duration.Inf)
+*/
+
+/*
+// future map
+val f: Future[String] = Future("hello")
+val ff: Future[Int] = f.map(_.size)
+
+println(Await.result(ff, Duration.Inf))
+
+
+// future mapTo
+trait X
+trait A
+trait B extends A
+case class Foo(z: Int) extends X with B
+
+val f: Future[Foo] = Future{ Foo(1) }
+val fx: Future[X] = f.mapTo[X]
+val fb: Future[B] = fx.mapTo[B]
+val fa: Future[A] = fb
+*/
+
+
+
+
+/*
+// future apply3
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val a: Future[String] = Future {
+  Thread.sleep(3000)
+  println(new java.util.Date())
+  "fuga"
+}
+(1 to 30).foreach(_ => a)
+*/
+
+
+
+/*
+// future apply2
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+println("start")
+val p: Promise[String] = Promise[String]
+val a: Future[String] = p.future
+println("1")
+
+scala.concurrent.ExecutionContext.Implicits.global.execute(
+  new Runnable{
+    println("2")
+    def run = {
+      Thread.sleep(3000)
+      p.success("fuga")
+    }
+    println("3")
+  }
+)
+
+Await.ready(a, Duration.Inf)
+println("4")
+a.foreach(println)
+
+println("end")
+*/
+
+/*
+// future apply
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val a: Future[String] = Future {
+  Thread.sleep(3000)
+  "fuga"
+}
+Await.ready(a, Duration.Inf)
+a.foreach(println)
+*/
+
+
+/*
+// ec確認
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
+
+def now() = new java.util.Date();
+(1 to 300).foreach{_ => ec.execute(new Runnable {def run {Thread.sleep(500); println(now)}})}
+
+Thread.sleep(10000)
+*/
+
+
+
+/*
+// ExecutionContext スレッドをうまい具合に使ってくれる
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+
+val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
+
+def now() = new java.util.Date();
+println(now)
+ec.execute(new Runnable{
+  println("in")
+  def run: Unit = {
+    Thread.sleep(1000)
+    println("fuga! " + now)
+  }
+})
+println(now)
+
+Thread.sleep(3000)
+*/
+
+/*
+// future promises2
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
+import scala.concurrent.duration.Duration
+
+// stop-watch
+def sw[A](body: => A): Unit = {
+  val start = System.currentTimeMillis
+  try {
+    println(s"got [$body], elapsed time [${(System.currentTimeMillis - start) / 1000.0}]msec")
+  } catch {
+    case th: Throwable =>
+      println(s"got Exception[$th], elapsed time [${(System.currentTimeMillis - start) / 1000.0}]msec")
+  }
+}
+
+// wait-and-get
+def wag(waitSec: Int, n: Int): Int = {
+  Thread.sleep(waitSec * 1000L)
+  n
+}
+
+sw {
+  val f = Future { wag(3, 5) }
+  Await.result(f, Duration.Inf)
+}
+
+// map
+sw {
+  val f = Future { wag(3, 5) } map {n => wag(5,10)}
+  Await.result(f, Duration.Inf)
+}
+
+sw {
+  val f1 = Future { wag(3, 5) }
+  val f2 = Future { wag(5, 10) }
+  val fs = f1 flatMap { n1 => f2 map { n2 => n1 + n2 } }
+  Await.result(fs, Duration.Inf)
+}
+
+// for
+sw {
+  val f1 = Future { wag(3, 5) }
+  val f2 = Future { wag(5, 10) }
+  val fs = for {
+    n1 <- f1
+    n2 <- f2
+  } yield n1 + n2
+  Await.result(fs, Duration.Inf)
+}
+
+// recover
+sw {
+  val f = Future {
+    1 / 0
+  } recover {
+    case th: ArithmeticException => 5
+  }
+  Await.result(f, Duration.Inf)
+}
+
+sw {
+  val f = Future {
+    1 / 0
+  } recoverWith {
+    case th: ArithmeticException => Future { wag(3, 5) }
+  }
+  Await.result(f, Duration.Inf)
+}
+
+// fallbacktTo
+sw {
+  val f = Future { 1 / 0 } fallbackTo Future { wag(3, 5) }
+  Await.result(f, Duration.Inf)
+}
+
+// andThen
+sw {
+  val f = Future { wag(3, 5) }
+    .andThen { case Success(n) => println(n); 20 }  // 5
+    .andThen { case Success(n) => println(n); 10 }  // 5
+  Await.result(f, Duration.Inf)
+}
+
+// zip
+sw {
+  val f = Future { throw new Exception } zip Future { wag(5, 10) }
+  Await.result(f, Duration.Inf)
+}
+
+sw {
+  val f = Future { wag(3, 5) } zip Future { throw new Exception }
+  Await.result(f, Duration.Inf)
+}
+
+// failed
+sw {
+  val f = Future { wag(3, 5) }
+  f.failed.foreach(th => println(s"got Exception[${th}]"))
+  Await.result(f, Duration.Inf)
+}
+
+sw {
+  val f = Future { Thread.sleep(3000L); 1 / 0 }
+  f.failed.foreach(th => println(s"got Exception[${th}]"))
+  Await.result(f, Duration.Inf)
+}
+
+sw {
+  val f = Future { Thread.sleep(3000L); 1 / 0 }
+  for (th <- f.failed) println(s"got Exception[${th}]")
+  Await.result(f, Duration.Inf)
+}
+
+// transform
+sw {
+  val f = Future { wag(3, 5) } transform ({ n => n * 10}, { th => new RuntimeException(th) })
+  Await.result(f, Duration.Inf)
+}
+
+sw {
+  val f = Future { 1 / 0 } transform ({ n => n * 10}, { th => new RuntimeException(th) })
+  Await.result(f, Duration.Inf)
+}
+*/
+
+
+
+/*
+// future promises
+import scala.concurrent._
+import ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
+import scala.concurrent.duration.Duration
+
+val session = "seess"
+val f: Future[String] = Future {
+  session
+}
+
+f onComplete {
+  case Success(posts) => for (post <- posts) println(post)
+  case Failure(t) => println("エラーが発生した: " + t.getMessage)
+}
+
+val fu = Future { Thread.sleep(3000L); 10 }
+println(Await.result(fu, Duration.Inf))
+*/
+
 /*
 // future3 callback
 import scala.util._
@@ -2896,7 +3392,7 @@ println("end")
 
 
 /*
-// 並行処理4 future -> NG ?が使えない
+// 並行処理4 Future -> NG ?が使えない
 import akka.actor
 import akka.actor._
 import akka.pattern._
